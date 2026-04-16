@@ -20,14 +20,14 @@ state. This script therefore makes the mapping explicit and refuses to silently 
 state values where the sub-division data cannot separate the state cleanly.
 
 Usage with free 1901-2017 time series:
-    python build_states_normals_from_imd_subdivisions.py \
+    python scripts/build_states_normals_from_imd_subdivisions.py \
         --input sub_divisional_monthly_rainfall_1901_2017.csv \
         --start-year 1971 \
         --end-year 2000 \
         --output states_normals_from_imd.csv
 
 Usage with a precomputed normals table:
-    python build_states_normals_from_imd_subdivisions.py \
+    python scripts/build_states_normals_from_imd_subdivisions.py \
         --input imd_subdivision_normals.csv \
         --output states_normals_from_imd.csv
 

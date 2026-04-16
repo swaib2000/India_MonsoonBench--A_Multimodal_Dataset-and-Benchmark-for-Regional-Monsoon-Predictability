@@ -306,7 +306,7 @@ def main() -> None:
         if skipped_without_year and not grouped:
             raise ValueError(
                 "samples.csv does not contain usable year metadata. "
-                "Re-run extract_patches.py with --sample-mode year_forecast."
+                "Re-run scripts/extract_patches.py with --sample-mode year_forecast."
             )
 
         for (split, state, label, year), sample_ids in sorted(grouped.items()):

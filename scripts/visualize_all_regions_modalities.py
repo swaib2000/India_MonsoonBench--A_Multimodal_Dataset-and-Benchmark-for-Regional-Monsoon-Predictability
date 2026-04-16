@@ -2,7 +2,7 @@
 """
 Generate multimodal raster mosaic figures for all four climate regions.
 
-This is a convenience wrapper around visualize_region_modalities.py. It creates
+This is a convenience wrapper around scripts/visualize_region_modalities.py. It creates
 one figure per region for a selected year/month using:
   - elevation
   - rainfall class
@@ -63,7 +63,7 @@ def main() -> None:
     for region in REGIONS:
         cmd = [
             sys.executable,
-            "visualize_region_modalities.py",
+            "scripts/visualize_region_modalities.py",
             "--manifest",
             args.manifest,
             "--region",

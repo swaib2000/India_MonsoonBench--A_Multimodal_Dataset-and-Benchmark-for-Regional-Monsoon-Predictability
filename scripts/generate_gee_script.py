@@ -6,7 +6,7 @@ This script generates Google Earth Engine JavaScript code to collect multimodal
 weather data for a specified Indian state.
 
 Usage:
-    python generate_gee_script.py --state "StateName" --normals "10,5,15,20,50,150,200,180,150,100,30,10"
+    python scripts/generate_gee_script.py --state "StateName" --normals "10,5,15,20,50,150,200,180,150,100,30,10"
 
 Required arguments:
     --state: Name of the Indian state (must match FAO/GAUL ADM1_NAME)
@@ -14,7 +14,7 @@ Required arguments:
 
 Output:
     Prints the complete GEE JavaScript code to stdout.
-    Redirect to a file: python generate_gee_script.py ... > state_gee_script.js
+    Redirect to a file: python scripts/generate_gee_script.py ... > state_gee_script.js
 """
 
 import argparse

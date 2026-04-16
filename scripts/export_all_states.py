@@ -6,7 +6,7 @@ This script reads the states_normals.csv and exports multimodal data
 for all remaining states programmatically.
 
 Usage:
-    python export_all_states.py --project "your-gee-project-id"
+    python scripts/export_all_states.py --project "your-gee-project-id"
 
 Note: This will start 176 export tasks (8 per state × 22 states) for complete
 12-month data collection (2020-2024).
@@ -44,7 +44,7 @@ def main():
             print(f"Starting exports for {state}...")
 
             # Run the export script for this state
-            cmd = f"python export_state_data.py --state '{state}' --normals '{normals}' --project '{args.project}'"
+            cmd = f"python scripts/export_state_data.py --state '{state}' --normals '{normals}' --project '{args.project}'"
             try:
                 result = subprocess.run(cmd, shell=True, capture_output=True, text=True, check=True)
                 print(result.stdout)

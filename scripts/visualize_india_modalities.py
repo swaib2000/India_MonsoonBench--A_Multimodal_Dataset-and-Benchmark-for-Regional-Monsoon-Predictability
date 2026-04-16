@@ -7,7 +7,7 @@ modality, mosaics all available state rasters, and writes a multi-panel PNG.
 
 Example:
 
-MPLCONFIGDIR=/tmp/matplotlib-cache python visualize_india_modalities.py \
+MPLCONFIGDIR=/tmp/matplotlib-cache python scripts/visualize_india_modalities.py \
   --manifest modeling_manifest.csv \
   --year 2024 \
   --month 9 \

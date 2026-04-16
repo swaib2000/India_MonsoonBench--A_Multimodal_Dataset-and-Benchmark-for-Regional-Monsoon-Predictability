@@ -33,7 +33,7 @@ try:
     from torch.utils.data import DataLoader, Dataset
 except Exception as exc:  # pragma: no cover
     raise SystemExit(
-        "PyTorch is required for train_cnn_baseline.py. "
+        "PyTorch is required for scripts/train_cnn_baseline.py. "
         "Install torch in your training environment first."
     ) from exc
 

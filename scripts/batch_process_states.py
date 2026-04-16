@@ -9,7 +9,7 @@ CSV format: state,normals
 Where normals is comma-separated: June,July,August,September
 
 Usage:
-    python batch_process_states.py --csv states_normals.csv
+    python scripts/batch_process_states.py --csv states_normals.csv
 """
 
 import os
@@ -38,7 +38,7 @@ def main():
 
             # Generate GEE script
             gee_file = f"{state.lower().replace(' ', '_')}_gee.js"
-            cmd = f"python generate_gee_script.py --state '{state}' --normals '{normals}'"
+            cmd = f"python scripts/generate_gee_script.py --state '{state}' --normals '{normals}'"
 
             try:
                 result = subprocess.run(cmd, shell=True, capture_output=True, text=True, check=True)

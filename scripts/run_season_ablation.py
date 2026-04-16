@@ -171,7 +171,7 @@ def main() -> None:
                 [
                     sys.executable,
                     "-u",
-                    "extract_patches.py",
+                    "scripts/extract_patches.py",
                     "--manifest",
                     str(manifest),
                     "--output-dir",
@@ -211,7 +211,7 @@ def main() -> None:
             run_command(
                 [
                     sys.executable,
-                    "make_splits.py",
+                    "scripts/make_splits.py",
                     "--dataset-dir",
                     str(dataset_dir),
                     "--split-mode",
@@ -234,7 +234,7 @@ def main() -> None:
                 [
                     sys.executable,
                     "-u",
-                    "train_patch_baselines.py",
+                    "scripts/train_patch_baselines.py",
                     "--dataset-dir",
                     str(dataset_dir),
                     "--output-dir",
@@ -258,7 +258,7 @@ def main() -> None:
             run_command(
                 [
                     sys.executable,
-                    "analyze_patch_predictions.py",
+                    "scripts/analyze_patch_predictions.py",
                     "--dataset-dir",
                     str(dataset_dir),
                     "--run-dir",

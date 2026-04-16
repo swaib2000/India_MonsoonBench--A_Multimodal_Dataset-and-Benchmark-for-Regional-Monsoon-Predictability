@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Optuna hyperparameter tuning wrapper for train_patch_baselines.py.
+Optuna hyperparameter tuning wrapper for scripts/train_patch_baselines.py.
 
 This script launches one training run per Optuna trial, reads the resulting
 metrics.json, and optimizes a validation metric. It intentionally treats the
@@ -8,7 +8,7 @@ test metric as reporting-only so that hyperparameter selection remains based on
 the validation year.
 
 Example:
-    python tune_patch_baselines_optuna.py \
+    python scripts/tune_patch_baselines_optuna.py \
       --dataset-dir patch_dataset_monthly_ar_northwest_himalayan_full \
       --study-name northwest_monthly_ar_conv3d \
       --output-root baseline_runs/optuna_northwest_monthly_ar \
@@ -138,7 +138,7 @@ def build_trial_command(
 
     cmd = [
         sys.executable,
-        "train_patch_baselines.py",
+        "scripts/train_patch_baselines.py",
         "--dataset-dir",
         args.dataset_dir,
         "--output-dir",

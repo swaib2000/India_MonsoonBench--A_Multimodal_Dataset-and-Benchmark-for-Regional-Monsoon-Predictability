@@ -13,7 +13,7 @@ Default dynamic predictors:
 Static/context predictor:
     elevation, lulc, or none
 
-The output layout matches train_patch_baselines.py:
+The output layout matches scripts/train_patch_baselines.py:
     X.npy       (N, C, patch_size, patch_size)
     y.npy       (N,)
     samples.csv metadata, including region, target month, and transition label

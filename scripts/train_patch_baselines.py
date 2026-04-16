@@ -33,7 +33,7 @@ try:
     from torch.utils.data import DataLoader, Dataset
 except Exception as exc:  # pragma: no cover
     raise SystemExit(
-        "PyTorch is required for train_patch_baselines.py. "
+        "PyTorch is required for scripts/train_patch_baselines.py. "
         "Install torch in your training environment first."
     ) from exc
 
@@ -767,7 +767,7 @@ class YearMonthSwin3DBaseline(nn.Module):
         if year_steps <= 0 or month_steps <= 0:
             raise ValueError(
                 "YearMonthSwin3D requires year_steps and month_steps in config.json. "
-                "Create data with extract_patches.py --sample-mode year_sequence_forecast."
+                "Create data with scripts/extract_patches.py --sample-mode year_sequence_forecast."
             )
         if year_steps * month_steps != time_steps:
             raise ValueError(f"Expected year_steps*month_steps == time_steps, got {year_steps}*{month_steps}!={time_steps}")

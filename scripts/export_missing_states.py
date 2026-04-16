@@ -2,15 +2,15 @@
 """
 Start Google Earth Engine exports for selected missing states.
 
-This is a thin wrapper around export_state_data.py that reads monthly
+This is a thin wrapper around scripts/export_state_data.py that reads monthly
 rainfall normals from states_normals.csv where available. Jammu & Kashmir
 is intentionally not given a default normal because it is not present in
 the current normals table.
 
 Examples:
-    python export_missing_states.py --project YOUR_GEE_PROJECT_ID
+    python scripts/export_missing_states.py --project YOUR_GEE_PROJECT_ID
 
-    python export_missing_states.py --project YOUR_GEE_PROJECT_ID \
+    python scripts/export_missing_states.py --project YOUR_GEE_PROJECT_ID \
       --states "Odisha,Telangana,Jammu and Kashmir" \
       --jk-normals "JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC"
 """
@@ -108,7 +108,7 @@ def main() -> None:
     for state in states:
         cmd = [
             sys.executable,
-            "export_state_data.py",
+            "scripts/export_state_data.py",
             "--state",
             state,
             "--normals",

@@ -8,30 +8,30 @@ This script does two things:
    Jan-Dec monthly autoregressive training:
       - GT category source should be 65 bands after processing
       - dynamic predictors should be 60 bands after export
-   Full export delegates to export_state_data.py and exports all 8 files.
+   Full export delegates to scripts/export_state_data.py and exports all 8 files.
 
 2. LULC-only export for states that already have complete full-monthly stacks
    but are missing LULC locally.
 
 The script only submits GEE tasks. It does not download from Google Drive and
 does not overwrite local GridData files. After tasks complete, download/sync
-files from Google Drive/GEE_Exports and run prepare_missing_states_from_exports.py
-or process_state_data.py as appropriate.
+files from Google Drive/GEE_Exports and run scripts/prepare_missing_states_from_exports.py
+or scripts/process_state_data.py as appropriate.
 
 Examples:
     # Dry run: see what would be submitted
-    python3 export_repair_full_monthly_and_lulc.py \
+    python3 scripts/export_repair_full_monthly_and_lulc.py \
       --project weather-analysis-461411 \
       --regions all \
       --dry-run
 
     # Submit all missing full exports + LULC-only exports serially
-    python3 export_repair_full_monthly_and_lulc.py \
+    python3 scripts/export_repair_full_monthly_and_lulc.py \
       --project weather-analysis-461411 \
       --regions all
 
     # Avoid duplicating states already submitted manually
-    python3 export_repair_full_monthly_and_lulc.py \
+    python3 scripts/export_repair_full_monthly_and_lulc.py \
       --project weather-analysis-461411 \
       --regions all \
       --exclude-full-states "Rajasthan,Himachal Pradesh,Bihar"
@@ -215,7 +215,7 @@ def missing_lulc(row: dict[str, str]) -> bool:
 def submit_full_export(state: str, normals: str, project: str, dry_run: bool) -> None:
     cmd = [
         sys.executable,
-        "export_state_data.py",
+        "scripts/export_state_data.py",
         "--state",
         state,
         "--normals",

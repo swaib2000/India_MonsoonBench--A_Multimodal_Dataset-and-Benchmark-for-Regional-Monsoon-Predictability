@@ -91,7 +91,7 @@ def train_followup_model(args: argparse.Namespace, model: str, best: dict[str, s
     log_name = Path(f"train_{model}_monthly_ar_{args.region_name}_tuned.log")
     cmd = [
         sys.executable,
-        "train_patch_baselines.py",
+        "scripts/train_patch_baselines.py",
         "--dataset-dir",
         args.dataset_dir,
         "--output-dir",
@@ -126,8 +126,8 @@ def train_followup_model(args: argparse.Namespace, model: str, best: dict[str, s
 
 
 def analyze_run(dataset_dir: str, run_dir: Path) -> None:
-    run([sys.executable, "analyze_patch_predictions.py", "--dataset-dir", dataset_dir, "--run-dir", str(run_dir)])
-    run([sys.executable, "analyze_extreme_regime_errors.py", "--dataset-dir", dataset_dir, "--run-dir", str(run_dir)])
+    run([sys.executable, "scripts/analyze_patch_predictions.py", "--dataset-dir", dataset_dir, "--run-dir", str(run_dir)])
+    run([sys.executable, "scripts/analyze_extreme_regime_errors.py", "--dataset-dir", dataset_dir, "--run-dir", str(run_dir)])
 
 
 def main() -> None:
@@ -163,7 +163,7 @@ def main() -> None:
     run(
         [
             sys.executable,
-            "compute_ordinal_metrics.py",
+            "scripts/compute_ordinal_metrics.py",
             "--run-dirs",
             *run_dirs,
             "--output-csv",
@@ -174,7 +174,7 @@ def main() -> None:
     run(
         [
             sys.executable,
-            "analyze_transition_specific_performance.py",
+            "scripts/analyze_transition_specific_performance.py",
             "--dataset-dir",
             args.dataset_dir,
             "--run-dirs",
@@ -186,7 +186,7 @@ def main() -> None:
     run(
         [
             sys.executable,
-            "collect_rebuttal_model_results.py",
+            "scripts/collect_rebuttal_model_results.py",
             "--run-dirs",
             ",".join(run_dirs),
             "--output-csv",

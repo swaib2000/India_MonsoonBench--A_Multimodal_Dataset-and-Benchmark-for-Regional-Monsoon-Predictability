@@ -225,7 +225,7 @@ def train_ablation(
 
     cmd = [
         sys.executable,
-        "train_patch_baselines.py",
+        "scripts/train_patch_baselines.py",
         "--dataset-dir",
         region_cfg["dataset_dir"],
         "--output-dir",
@@ -273,7 +273,7 @@ def analyze_run(dataset_dir: str, run_dir: Path, args: argparse.Namespace) -> No
     commands = [
         [
             sys.executable,
-            "analyze_patch_predictions.py",
+            "scripts/analyze_patch_predictions.py",
             "--dataset-dir",
             dataset_dir,
             "--run-dir",
@@ -281,7 +281,7 @@ def analyze_run(dataset_dir: str, run_dir: Path, args: argparse.Namespace) -> No
         ],
         [
             sys.executable,
-            "analyze_extreme_regime_errors.py",
+            "scripts/analyze_extreme_regime_errors.py",
             "--dataset-dir",
             dataset_dir,
             "--run-dir",
@@ -289,7 +289,7 @@ def analyze_run(dataset_dir: str, run_dir: Path, args: argparse.Namespace) -> No
         ],
         [
             sys.executable,
-            "compute_ordinal_metrics.py",
+            "scripts/compute_ordinal_metrics.py",
             "--run-dirs",
             str(run_dir),
             "--output-csv",

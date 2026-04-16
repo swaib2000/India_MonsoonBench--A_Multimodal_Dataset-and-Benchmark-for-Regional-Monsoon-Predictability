@@ -26,7 +26,7 @@ import numpy as np
 import rasterio
 
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 STATE = "Bihar"
 STATE_DIR = ROOT / "GridData" / STATE
 EXPORT_DIR = ROOT / "GEE_Exports"
@@ -212,7 +212,7 @@ def collapse_elevation() -> None:
 def process_bihar() -> None:
     cmd = [
         sys.executable,
-        str(ROOT / "process_state_data.py"),
+        str(ROOT / "scripts/process_state_data.py"),
         "--state",
         STATE,
         "--normals",

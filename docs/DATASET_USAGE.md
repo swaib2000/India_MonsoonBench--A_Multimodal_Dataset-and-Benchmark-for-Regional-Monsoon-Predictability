@@ -78,7 +78,7 @@ print(len(train_idx), len(val_idx), len(test_idx))
 From the repository root:
 
 ```bash
-python train_patch_baselines.py \
+python scripts/train_patch_baselines.py \
   --dataset-dir India_MonsoonBench_DataRelease/patch_datasets/patch_dataset_monthly_ar_northwest_himalayan_full \
   --output-dir baseline_runs/tutorial_convlstm_northwest \
   --model convlstm \

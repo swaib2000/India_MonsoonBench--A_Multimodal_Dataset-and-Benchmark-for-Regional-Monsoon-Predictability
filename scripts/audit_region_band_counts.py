@@ -9,7 +9,7 @@ do not have the required full-year stacks:
   - static predictor: at least 1 band
 
 Example:
-    python3 audit_region_band_counts.py \
+    python3 scripts/audit_region_band_counts.py \
       --regions south_peninsular_deccan,east_northeast_humid_orographic
 """
 

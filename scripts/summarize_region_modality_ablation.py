@@ -5,7 +5,7 @@ Summarize region-specific modality ablations from existing model runs.
 Expected inputs are run directories that already contain per_region_metrics.csv,
 typically produced by:
 
-python analyze_patch_predictions.py --dataset-dir <dataset> --run-dir <run_dir>
+python scripts/analyze_patch_predictions.py --dataset-dir <dataset> --run-dir <run_dir>
 
 The script compares each ablation against a baseline run and reports the
 region-wise change in weighted F1 and accuracy.
@@ -39,7 +39,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--ablation-runs", nargs="+", required=True, help="Run directories for ablations")
     parser.add_argument("--output-csv", default="baseline_runs/region_modality_ablation_summary.csv")
     parser.add_argument("--output-latex", default="baseline_runs/region_modality_ablation_table.tex")
-    parser.add_argument("--ensure-analysis", action="store_true", help="Run analyze_patch_predictions.py if needed")
+    parser.add_argument("--ensure-analysis", action="store_true", help="Run scripts/analyze_patch_predictions.py if needed")
     parser.add_argument("--sort-by-region", default="", help="Optional region name to sort rows by W-F1 drop")
     return parser.parse_args()
 
@@ -58,12 +58,12 @@ def ensure_region_metrics(dataset_dir: Path, run_dir: Path, ensure_analysis: boo
         return
     if not ensure_analysis:
         raise FileNotFoundError(
-            f"Missing {metrics_path}. Re-run with --ensure-analysis or run analyze_patch_predictions.py first."
+            f"Missing {metrics_path}. Re-run with --ensure-analysis or run scripts/analyze_patch_predictions.py first."
         )
     subprocess.run(
         [
             sys.executable,
-            "analyze_patch_predictions.py",
+            "scripts/analyze_patch_predictions.py",
             "--dataset-dir",
             str(dataset_dir),
             "--run-dir",

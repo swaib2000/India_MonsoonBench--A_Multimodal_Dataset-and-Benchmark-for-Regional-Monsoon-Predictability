@@ -6,7 +6,7 @@ This script exports multimodal weather data for a specified Indian state
 directly to Google Drive using the Earth Engine Python API.
 
 Usage:
-    python export_state_data.py --state "Maharashtra" --normals "20,15,20,25,70,200,400,300,200,100,40,20" --project "your-project-id"
+    python scripts/export_state_data.py --state "Maharashtra" --normals "20,15,20,25,70,200,400,300,200,100,40,20" --project "your-project-id"
 
 Required arguments:
     --state: Name of the Indian state

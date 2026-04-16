@@ -11,7 +11,7 @@ from the older Jun-Sep workflow. The full exports already exist in GEE_Exports:
 The script:
   1. Backs up the legacy Assam rasters.
   2. Copies full exports into GridData/Assam.
-  3. Runs process_state_data.py to regenerate GT and masked predictors.
+  3. Runs scripts/process_state_data.py to regenerate GT and masked predictors.
   4. Prints an audit of final band counts.
 """
 
@@ -25,7 +25,7 @@ from pathlib import Path
 import rasterio
 
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 STATE = "Assam"
 STATE_DIR = ROOT / "GridData" / STATE
 EXPORT_DIR = ROOT / "GEE_Exports"
@@ -101,7 +101,7 @@ def copy_exports() -> None:
 def process_assam() -> None:
     cmd = [
         sys.executable,
-        str(ROOT / "process_state_data.py"),
+        str(ROOT / "scripts/process_state_data.py"),
         "--state",
         STATE,
         "--normals",

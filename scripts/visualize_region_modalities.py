@@ -11,7 +11,7 @@ plots the same variables used in the monthly autoregressive benchmark:
 It does not use LULC.
 
 Example:
-    python visualize_region_modalities.py \
+    python scripts/visualize_region_modalities.py \
       --manifest modeling_manifest.csv \
       --region northwest_himalayan \
       --year 2024 \

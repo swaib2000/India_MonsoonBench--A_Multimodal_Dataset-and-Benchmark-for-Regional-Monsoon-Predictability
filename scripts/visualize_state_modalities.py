@@ -4,14 +4,14 @@ Visualize multimodal raster maps for each state.
 
 Examples:
 
-python visualize_state_modalities.py \
+python scripts/visualize_state_modalities.py \
   --manifest modeling_manifest.csv \
   --states "Andhra Pradesh,Uttarakhand" \
   --year 2024 \
   --month 9 \
   --include-gt
 
-python visualize_state_modalities.py \
+python scripts/visualize_state_modalities.py \
   --manifest modeling_manifest_full_year_states.csv \
   --all-states \
   --year 2024 \

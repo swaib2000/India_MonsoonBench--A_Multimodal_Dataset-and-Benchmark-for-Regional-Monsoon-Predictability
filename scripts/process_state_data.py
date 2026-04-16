@@ -8,7 +8,7 @@ This script processes the downloaded GEE TIFFs for a state:
 3. Saves processed TIFFs
 
 Usage:
-    python process_state_data.py --state StateName --normals "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec"
+    python scripts/process_state_data.py --state StateName --normals "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec"
 
 Required arguments:
     --state: Name of the Indian state

@@ -8,7 +8,7 @@ The script reuses the India-wide raster mosaic utilities to generate:
 
 Example:
 
-MPLCONFIGDIR=/tmp/matplotlib-cache python create_readme_modality_collage.py \
+MPLCONFIGDIR=/tmp/matplotlib-cache python scripts/create_readme_modality_collage.py \
   --manifest modeling_manifest.csv \
   --year 2024 \
   --month 9 \

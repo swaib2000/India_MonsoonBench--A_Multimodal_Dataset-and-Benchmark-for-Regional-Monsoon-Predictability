@@ -2,11 +2,11 @@
 """
 Run a resumable hyperparameter sweep for patch-based rainfall benchmarks.
 
-The script launches train_patch_baselines.py repeatedly, one configuration at a
+The script launches scripts/train_patch_baselines.py repeatedly, one configuration at a
 time, then collects metrics.json from completed runs into a ranked summary.
 
 Example:
-    python run_hparam_sweep.py \
+    python scripts/run_hparam_sweep.py \
       --dataset-dir patch_dataset_monthly_ar_northwest_himalayan_full \
       --sweep-name northwest_himalayan_monthly_ar \
       --preset regional_ar_core \
@@ -39,7 +39,7 @@ class TrialConfig:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run hyperparameter sweep for train_patch_baselines.py")
+    parser = argparse.ArgumentParser(description="Run hyperparameter sweep for scripts/train_patch_baselines.py")
     parser.add_argument("--dataset-dir", required=True)
     parser.add_argument("--sweep-name", required=True)
     parser.add_argument("--output-root", default="baseline_runs/hparam_sweeps")
@@ -173,7 +173,7 @@ def run_trial(
 ) -> int:
     cmd = [
         sys.executable,
-        "train_patch_baselines.py",
+        "scripts/train_patch_baselines.py",
         "--dataset-dir",
         args.dataset_dir,
         "--output-dir",

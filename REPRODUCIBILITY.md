@@ -18,7 +18,7 @@ PY
 Start exports for a state:
 
 ```bash
-python export_state_data.py \
+python scripts/export_state_data.py \
   --state "Uttarakhand" \
   --normals "49.6,54.9,54.7,40.5,65.6,184.7,435.8,426.2,204.4,58.4,9.9,21.6" \
   --project YOUR_GEE_PROJECT_ID
@@ -29,7 +29,7 @@ Downloaded exports should be organized under `GridData/<State>/`.
 ## 2. Generate Ground Truth and Mask Predictors
 
 ```bash
-python process_state_data.py --grid-data-dir GridData --normals states_normals.csv
+python scripts/process_state_data.py --grid-data-dir GridData --normals states_normals.csv
 ```
 
 This creates rainfall class labels and masked predictor rasters for each state.
@@ -37,7 +37,7 @@ This creates rainfall class labels and masked predictor rasters for each state.
 ## 3. Build Monthly Autoregressive Patch Datasets
 
 ```bash
-python extract_monthly_autoregressive_patches.py \
+python scripts/extract_monthly_autoregressive_patches.py \
   --manifest modeling_manifest.csv \
   --region central_monsoon_core \
   --output-dir patch_dataset_monthly_ar_central_monsoon_core_full_bihar \
@@ -57,7 +57,7 @@ python extract_monthly_autoregressive_patches.py \
 ## 4. Train Baselines
 
 ```bash
-python train_patch_baselines.py \
+python scripts/train_patch_baselines.py \
   --dataset-dir patch_dataset_monthly_ar_central_monsoon_core_full_bihar \
   --output-dir baseline_runs/convlstm_monthly_ar_central_monsoon_core_ce \
   --model convlstm \
@@ -72,7 +72,7 @@ Supported model names include `conv3d`, `convlstm`, and `swin3d`.
 ## 5. Run Simple Climate Baselines
 
 ```bash
-python run_monthly_ar_simple_baselines.py \
+python scripts/run_monthly_ar_simple_baselines.py \
   --datasets patch_dataset_monthly_ar_central_monsoon_core_full_bihar \
   --output-root baseline_runs/simple_monthly_ar_baselines \
   --run-analysis
@@ -83,20 +83,20 @@ This evaluates persistence and seasonal climatology baselines.
 ## 6. Run Diagnostics
 
 ```bash
-python analyze_patch_predictions.py \
+python scripts/analyze_patch_predictions.py \
   --dataset-dir patch_dataset_monthly_ar_central_monsoon_core_full_bihar \
   --run-dir baseline_runs/convlstm_monthly_ar_central_monsoon_core_ce
 
-python analyze_extreme_regime_errors.py \
+python scripts/analyze_extreme_regime_errors.py \
   --dataset-dir patch_dataset_monthly_ar_central_monsoon_core_full_bihar \
   --run-dir baseline_runs/convlstm_monthly_ar_central_monsoon_core_ce
 
-python compute_ordinal_metrics.py \
+python scripts/compute_ordinal_metrics.py \
   --run-dirs baseline_runs/convlstm_monthly_ar_central_monsoon_core_ce \
   --output-csv baseline_runs/convlstm_monthly_ar_central_monsoon_core_ce/ordinal_metrics_summary.csv \
   --write-json
 
-python analyze_transition_specific_performance.py \
+python scripts/analyze_transition_specific_performance.py \
   --dataset-dir patch_dataset_monthly_ar_central_monsoon_core_full_bihar \
   --run-dirs baseline_runs/convlstm_monthly_ar_central_monsoon_core_ce \
   --output-dir baseline_runs/convlstm_monthly_ar_central_monsoon_core_ce/transition_analysis
@@ -105,7 +105,7 @@ python analyze_transition_specific_performance.py \
 ## 7. Modality Ablation
 
 ```bash
-python run_leave_one_modality_ablation_all_regions.py \
+python scripts/run_leave_one_modality_ablation_all_regions.py \
   --selection-metric weighted_f1 \
   --epochs 30
 ```

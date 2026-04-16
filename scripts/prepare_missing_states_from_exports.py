@@ -5,14 +5,14 @@ Organize downloaded GEE exports into GridData/<State>/ and run post-processing.
 This script assumes exported TIFFs have already been downloaded/synced into
 GEE_Exports/. It copies the raw TIFFs into each state folder, copies an
 existing SateMask folder if the state folder does not already have one, then
-runs process_state_data.py to create:
+runs scripts/process_state_data.py to create:
   - State_Y_Precipitation_GT_geotif.tif
   - State_X_*_masked.tif
 
 Examples:
-    python prepare_missing_states_from_exports.py --states "Odisha,Telangana"
+    python scripts/prepare_missing_states_from_exports.py --states "Odisha,Telangana"
 
-    python prepare_missing_states_from_exports.py \
+    python scripts/prepare_missing_states_from_exports.py \
       --states "Odisha,Telangana,Jammu and Kashmir" \
       --jk-normals "JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC"
 """
@@ -150,7 +150,7 @@ def main() -> None:
 
         cmd = [
             sys.executable,
-            str(Path.cwd() / "process_state_data.py"),
+            str(Path.cwd() / "scripts/process_state_data.py"),
             "--state",
             state,
             "--normals",

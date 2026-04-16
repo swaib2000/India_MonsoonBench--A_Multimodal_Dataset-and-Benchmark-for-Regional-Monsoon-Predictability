@@ -9,7 +9,7 @@ source regional mosaics already contain the corrected state boundaries/masks.
 
 Example:
 
-python create_readme_region_modality_collage.py \
+python scripts/create_readme_region_modality_collage.py \
   --source-dir website/assets/images/regions \
   --output-dir website/assets/images/readme
 """

@@ -209,12 +209,12 @@ def run_command(cmd: list[str]) -> None:
 
 
 def analyze(dataset_dir: Path, run_dir: Path) -> None:
-    run_command([sys.executable, "analyze_patch_predictions.py", "--dataset-dir", str(dataset_dir), "--run-dir", str(run_dir)])
-    run_command([sys.executable, "analyze_extreme_regime_errors.py", "--dataset-dir", str(dataset_dir), "--run-dir", str(run_dir)])
+    run_command([sys.executable, "scripts/analyze_patch_predictions.py", "--dataset-dir", str(dataset_dir), "--run-dir", str(run_dir)])
+    run_command([sys.executable, "scripts/analyze_extreme_regime_errors.py", "--dataset-dir", str(dataset_dir), "--run-dir", str(run_dir)])
     run_command(
         [
             sys.executable,
-            "compute_ordinal_metrics.py",
+            "scripts/compute_ordinal_metrics.py",
             "--run-dirs",
             str(run_dir),
             "--output-csv",
@@ -225,7 +225,7 @@ def analyze(dataset_dir: Path, run_dir: Path) -> None:
     run_command(
         [
             sys.executable,
-            "analyze_transition_specific_performance.py",
+            "scripts/analyze_transition_specific_performance.py",
             "--dataset-dir",
             str(dataset_dir),
             "--run-dirs",

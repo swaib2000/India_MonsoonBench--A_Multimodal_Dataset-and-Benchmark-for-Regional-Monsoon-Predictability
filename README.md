@@ -18,7 +18,7 @@ This makes the benchmark useful for climate-AI researchers who need a structured
 
 ## Dataset Story
 
-The dataset starts from state-wise Earth-observation rasters and converts them into spatially aligned monthly predictor stacks. Rainfall labels are defined using a physically interpretable anomaly ratio: observed CHIRPS rainfall is compared against Indian Meterology Department's (IMD) long-period-average rainfall normals. This creates five ordered rainfall anomaly classes following the familiar IMD interpretation of Scarcity, Deficit, Normal, Excess, and Large Excess rainfall.
+The dataset starts from state-wise Earth-observation rasters and converts them into spatially aligned monthly predictor stacks. Rainfall labels are defined using a physically interpretable anomaly ratio: observed CHIRPS rainfall is compared against Indian Meteorological Department (IMD) long-period-average rainfall normals. This creates five ordered rainfall anomaly classes following the familiar IMD interpretation of Scarcity, Deficit, Normal, Excess, and Large Excess rainfall.
 
 Unlike a generic image-classification dataset, India MonsoonBench preserves the spatial organization of each state and groups states into hydroclimatic rainfall regimes. The processed benchmark currently covers 25 Indian states across four regions. Large raster stacks and patch arrays are distributed separately from the GitHub repository; this repo contains the code, metadata, documentation, lightweight result summaries, and reproducibility scripts.
 
@@ -187,16 +187,16 @@ India MonsoonBench is:
 
 | Path | Purpose |
 |---|---|
-| `export_state_data.py`, `export_missing_months_state_data.py` | Google Earth Engine export scripts |
-| `process_state_data.py` | Rainfall class generation and raster masking |
-| `extract_monthly_autoregressive_patches.py` | Monthly AR patch extraction |
-| `make_splits.py` | Year-held-out split generation |
-| `train_patch_baselines.py` | CNN, Conv3D, ConvLSTM, Swin3D and loss variants |
-| `run_region_rebuttal_followups.py` | Regional model training/evaluation workflow |
-| `run_monthly_ar_simple_baselines.py` | Persistence and seasonal climatology baselines |
-| `compute_ordinal_metrics.py` | Ordinal-distance metrics |
-| `analyze_extreme_regime_errors.py` | Scarcity/Large Excess error analysis |
-| `analyze_transition_specific_performance.py` | Monsoon-transition evaluation |
+| `scripts/export_state_data.py`, `scripts/export_missing_months_state_data.py` | Google Earth Engine export scripts |
+| `scripts/process_state_data.py` | Rainfall class generation and raster masking |
+| `scripts/extract_monthly_autoregressive_patches.py` | Monthly AR patch extraction |
+| `scripts/make_splits.py` | Year-held-out split generation |
+| `scripts/train_patch_baselines.py` | CNN, Conv3D, ConvLSTM, Swin3D and loss variants |
+| `scripts/run_region_rebuttal_followups.py` | Regional model training/evaluation workflow |
+| `scripts/run_monthly_ar_simple_baselines.py` | Persistence and seasonal climatology baselines |
+| `scripts/compute_ordinal_metrics.py` | Ordinal-distance metrics |
+| `scripts/analyze_extreme_regime_errors.py` | Scarcity/Large Excess error analysis |
+| `scripts/analyze_transition_specific_performance.py` | Monsoon-transition evaluation |
 | `results/` | Lightweight CSV result summaries suitable for git |
 | `website/` | Static project page with figures, tables, and benchmark explanation |
 | `docs/` | Repository organization and dataset usage notes |
@@ -217,7 +217,7 @@ pip install -r requirements.txt
 Extract one regional monthly AR dataset:
 
 ```bash
-python extract_monthly_autoregressive_patches.py \
+python scripts/extract_monthly_autoregressive_patches.py \
   --manifest modeling_manifest.csv \
   --region northwest_himalayan \
   --output-dir patch_dataset_monthly_ar_northwest_himalayan_full \
@@ -237,7 +237,7 @@ python extract_monthly_autoregressive_patches.py \
 Train a temporal baseline:
 
 ```bash
-python train_patch_baselines.py \
+python scripts/train_patch_baselines.py \
   --dataset-dir patch_dataset_monthly_ar_northwest_himalayan_full \
   --output-dir baseline_runs/convlstm_monthly_ar_northwest_himalayan_ce \
   --model convlstm \
@@ -250,11 +250,11 @@ python train_patch_baselines.py \
 Compute diagnostics:
 
 ```bash
-python analyze_patch_predictions.py \
+python scripts/analyze_patch_predictions.py \
   --dataset-dir patch_dataset_monthly_ar_northwest_himalayan_full \
   --run-dir baseline_runs/convlstm_monthly_ar_northwest_himalayan_ce
 
-python compute_ordinal_metrics.py \
+python scripts/compute_ordinal_metrics.py \
   --run-dirs baseline_runs/convlstm_monthly_ar_northwest_himalayan_ce \
   --output-csv baseline_runs/convlstm_monthly_ar_northwest_himalayan_ce/ordinal_metrics_summary.csv \
   --write-json
