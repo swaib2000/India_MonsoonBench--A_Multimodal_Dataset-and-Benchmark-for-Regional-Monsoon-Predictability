@@ -1,0 +1,8 @@
+state,imd_subdivisions,reason
+Goa,Konkan & Goa,IMD combines Goa with Konkan; source cannot isolate Goa.
+Haryana,Haryana Delhi & Chandigarh,IMD combines Haryana with Chandigarh and Delhi; source cannot isolate Haryana.
+Maharashtra,Konkan & Goa | Madhya Maharashtra | Matathwada | Vidarbha,Konkan is merged with Goa in IMD source; state cannot be isolated cleanly.
+Meghalaya,Assam & Meghalaya,IMD combines Assam and Meghalaya; source cannot isolate Meghalaya.
+Sikkim,Sub Himalayan West Bengal & Sikkim,IMD combines Sikkim with Sub-Himalayan West Bengal; source cannot isolate Sikkim.
+Tamil Nadu,Tamil Nadu,IMD combines Tamil Nadu with Puducherry and Karaikal; source cannot isolate Tamil Nadu.
+West Bengal,Gangetic West Bengal | Sub Himalayan West Bengal & Sikkim,Sub-Himalayan West Bengal is merged with Sikkim; source cannot isolate West Bengal cleanly.

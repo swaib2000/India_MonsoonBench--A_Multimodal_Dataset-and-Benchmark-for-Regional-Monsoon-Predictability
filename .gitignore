@@ -1,0 +1,69 @@
+# Python / notebooks
+__pycache__/
+*.py[cod]
+*.pyo
+.ipynb_checkpoints/
+.virtual_documents/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local environments
+.venv/
+venv/
+envs/
+miniconda3/
+anaconda_projects/
+.codex
+.codex/
+
+# Local/raw source drops and unrelated nested projects
+21444- Dataful/
+swaib2000.github.io/
+
+# Large geospatial exports and processed datasets
+GridData/
+GEE_Exports/
+patch_dataset*/
+*.tif
+*.tiff
+*.shp
+*.shx
+*.dbf
+*.prj
+*.cpg
+*.npy
+*.npz
+
+# Model outputs, checkpoints, and experiment artifacts
+baseline_runs/
+checkpoints/
+logs/
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.log
+
+# Generated visualizations outside the website
+india_modality_maps/
+predictor_correlation_analysis_monsoon_181k/
+region_modality_maps/
+region_modality_maps_all_sep2024*/
+state_modality_maps_preview/
+state_modality_maps_selected/
+
+# Review/private manuscript material
+*.pdf
+*.docx
+KDD Response*
+ACM KDD Review*
+Paper.pdf
+rebuttal_*
+supervisor_rebuttal_slides*
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

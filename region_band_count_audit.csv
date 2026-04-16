@@ -1,0 +1,7 @@
+region,state,gt_bands,elevation_bands,lulc_bands,lst_bands,ndvi_bands,rh_bands,soil_moisture_bands,wind_speed_bands,full_monthly_ready,lulc_ready,issues
+south_peninsular_deccan,Karnataka,25,20,20,20,20,20,20,20,no,yes,gt=25; lst=20; ndvi=20; rh=20; soil_moisture=20; wind_speed=20
+south_peninsular_deccan,Kerala,25,20,20,20,20,20,20,20,no,yes,gt=25; lst=20; ndvi=20; rh=20; soil_moisture=20; wind_speed=20
+south_peninsular_deccan,Andhra Pradesh,65,1,missing_file,60,60,60,60,60,no,no,lulc=missing
+south_peninsular_deccan,Goa,65,1,missing_file,60,60,60,60,60,no,no,lulc=missing
+south_peninsular_deccan,Tamil Nadu,65,1,missing_file,60,60,60,60,60,no,no,lulc=missing
+south_peninsular_deccan,Telangana,not_in_manifest,not_in_manifest,not_in_manifest,not_in_manifest,not_in_manifest,not_in_manifest,not_in_manifest,not_in_manifest,no,no,state_not_in_manifest

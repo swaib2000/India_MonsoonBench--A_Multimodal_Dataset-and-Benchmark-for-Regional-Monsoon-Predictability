@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benchmarks | India MonsoonBench</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav nav-light">
+    <a class="brand" href="index.html">India MonsoonBench</a>
+    <div class="nav-links">
+      <a href="dataset.html">Dataset</a>
+      <a href="methodology.html">Methodology</a>
+      <a class="active" href="benchmarks.html">Benchmarks</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="reproducibility.html">Reproducibility</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="page-title">
+      <p class="eyebrow">Benchmark Suite</p>
+      <h1>Strict temporal forecasting tasks with regional diagnostics.</h1>
+      <p class="lede dark">
+        The current benchmark suite includes annual next-year forecasting and
+        monthly autoregressive regional forecasting. The monthly AR task is the
+        strongest scientific formulation for the rebuttal.
+      </p>
+    </section>
+
+    <section class="section card-grid three">
+      <article class="feature-card">
+        <h3>Monthly AR Input</h3>
+        <p>19 channels: elevation plus six dynamic modalities across three previous months.</p>
+      </article>
+      <article class="feature-card">
+        <h3>Temporal Split</h3>
+        <p>Train on 2021-2022, validate on 2023, and test on 2024 for regional monthly tasks.</p>
+      </article>
+      <article class="feature-card">
+        <h3>Evaluation</h3>
+        <p>Accuracy, weighted F1, ordinal distance, extreme recall, and transition-specific performance.</p>
+      </article>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-kicker">Headline Results</p>
+        <h2>Representative benchmark results completed so far</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Task / Region</th>
+              <th>Model</th>
+              <th>Test Acc.</th>
+              <th>Weighted F1</th>
+              <th>Interpretation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2-year monthly context to next annual, capped sample benchmark</td>
+              <td>Swin3D year-month</td>
+              <td>0.516</td>
+              <td>0.508</td>
+              <td>Best overall benchmark result among completed runs.</td>
+            </tr>
+            <tr>
+              <td>2-year monthly context to next annual, capped sample benchmark</td>
+              <td>Conv3D</td>
+              <td>0.490</td>
+              <td>0.503</td>
+              <td>Strong convolutional baseline with competitive weighted F1.</td>
+            </tr>
+            <tr>
+              <td>South Peninsular-Deccan monthly AR</td>
+              <td>ConvLSTM</td>
+              <td>0.429</td>
+              <td>0.437</td>
+              <td>Temporal recurrence improves this regional task.</td>
+            </tr>
+            <tr>
+              <td>South Peninsular-Deccan monthly AR</td>
+              <td>Swin3D</td>
+              <td>0.429</td>
+              <td>0.433</td>
+              <td>Transformer-style spatial-temporal attention is competitive.</td>
+            </tr>
+            <tr>
+              <td>Northwest-Himalayan monthly AR</td>
+              <td>Swin3D</td>
+              <td>0.396</td>
+              <td>0.360</td>
+              <td>Best test accuracy among tuned northwest follow-up models.</td>
+            </tr>
+            <tr>
+              <td>Central Monsoon Core monthly AR, Bihar-inclusive</td>
+              <td>ConvLSTM</td>
+              <td>0.357</td>
+              <td>0.348</td>
+              <td>Best central accuracy after Bihar full-stack repair; Swin3D gives comparable weighted F1.</td>
+            </tr>
+            <tr>
+              <td>East-Northeast Humid Orographic monthly AR</td>
+              <td>ConvLSTM</td>
+              <td>0.286</td>
+              <td>0.283</td>
+              <td>Best Assam-inclusive east-northeast result; the region remains the hardest monthly AR benchmark.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">
+        Results are from completed local runs at the time this artifact preview was generated.
+        Final rebuttal tables should be refreshed after all regional workflows finish.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-kicker">Non-Neural Baselines</p>
+        <h2>Persistence and seasonal climatology baselines</h2>
+      </div>
+      <div class="table-wrap" data-csv="assets/tables/simple_baseline_summary.csv"></div>
+      <p class="note">
+        Persistence predicts the previous month rainfall class for the same spatial
+        patch. Seasonal climatology predicts the most frequent training label for
+        each state and target month. These baselines are intentionally strong:
+        they test whether deep models add value beyond seasonal and local-memory
+        priors.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-kicker">Model vs Baseline</p>
+        <h2>Best neural model compared with best simple baseline</h2>
+      </div>
+      <div class="table-wrap" data-csv="assets/tables/neural_vs_simple_baselines.csv"></div>
+      <p class="note">
+        The comparison is deliberately conservative. Neural models improve over
+        simple baselines in northwest and south regions, while seasonal climatology
+        remains stronger in the current central and east-northeast runs. This
+        strengthens the benchmark claim: the dataset exposes genuine seasonal
+        structure and region-specific difficulty rather than trivial classification.
+      </p>
+    </section>
+
+    <section class="section two-column">
+      <div>
+        <p class="section-kicker">Ablation Insight</p>
+        <h2>Multimodal predictors matter differently by region.</h2>
+      </div>
+      <div class="prose">
+        <p>
+          Modality ablations on Conv3D reveal that removing NDVI produces a large
+          drop in the annual benchmark, indicating that vegetation response carries
+          useful information about rainfall anomaly regimes. Wind removal also
+          degrades performance, while LST and soil moisture have region-dependent
+          effects. This supports the dataset's value as a multimodal diagnostic
+          resource rather than only a rainfall-label benchmark.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-kicker">Scientific Diagnostics</p>
+        <h2>Transition-specific evaluation turns model errors into climate questions</h2>
+      </div>
+      <div class="card-grid two">
+        <article class="feature-card">
+          <h3>Monsoon onset and peak</h3>
+          <p>
+            Northwest and south-regional analyses show different model strengths
+            across pre-monsoon to monsoon-onset and monsoon-peak transitions,
+            suggesting region-specific predictability.
+          </p>
+        </article>
+        <article class="feature-card">
+          <h3>Extreme recall</h3>
+          <p>
+            Scarcity and large-excess recall expose where models fail to detect
+            rare but high-impact regimes. These diagnostics are more scientifically
+            informative than accuracy alone.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-kicker">East-Northeast Result</p>
+        <h2>A deliberately hard humid-orographic benchmark</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Test Acc.</th>
+              <th>Weighted F1</th>
+              <th>Within-1 Acc.</th>
+              <th>Scarcity Recall</th>
+              <th>Large-Excess Recall</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Conv3D</td>
+              <td>0.236</td>
+              <td>0.247</td>
+              <td>0.558</td>
+              <td>0.248</td>
+              <td>0.172</td>
+            </tr>
+            <tr>
+              <td>ConvLSTM</td>
+              <td>0.286</td>
+              <td>0.283</td>
+              <td>0.653</td>
+              <td>0.513</td>
+              <td>0.044</td>
+            </tr>
+            <tr>
+              <td>Swin3D</td>
+              <td>0.269</td>
+              <td>0.271</td>
+              <td>0.612</td>
+              <td>0.401</td>
+              <td>0.065</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">
+        The Assam-inclusive east-northeast monthly AR dataset contains 57,440
+        samples from nine states. Adding Assam increases spatial coverage and
+        makes the humid-orographic benchmark harder, which is useful evidence of
+        region-specific domain complexity.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-kicker">Central Monsoon Core Result</p>
+        <h2>Large-sample central benchmark after Bihar repair</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Test Acc.</th>
+              <th>Weighted F1</th>
+              <th>Within-1 Acc.</th>
+              <th>Scarcity Recall</th>
+              <th>Large-Excess Recall</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Conv3D</td>
+              <td>0.351</td>
+              <td>0.348</td>
+              <td>0.646</td>
+              <td>0.588</td>
+              <td>0.370</td>
+            </tr>
+            <tr>
+              <td>ConvLSTM</td>
+              <td>0.357</td>
+              <td>0.348</td>
+              <td>0.638</td>
+              <td>0.630</td>
+              <td>0.386</td>
+            </tr>
+            <tr>
+              <td>Swin3D</td>
+              <td>0.346</td>
+              <td>0.348</td>
+              <td>0.649</td>
+              <td>0.521</td>
+              <td>0.365</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">
+        The central benchmark contains 238,057 samples across Bihar, Chhattisgarh,
+        Jharkhand, Madhya Pradesh, Maharashtra, and Uttar Pradesh. Bihar is now
+        included after merging missing monthly exports into full Jan-Dec stacks.
+      </p>
+    </section>
+
+    <section class="section callout">
+      <h2>Downloadable result artifacts</h2>
+      <p>CSV summaries are bundled with this static website preview.</p>
+      <div class="link-list">
+        <a href="assets/tables/model_metrics_summary.csv">All model metrics summary CSV</a>
+        <a href="assets/tables/northwest_monthly_ar_results_summary.csv">Northwest monthly AR result summary</a>
+        <a href="assets/tables/northwest_monthly_ar_ordinal_metrics.csv">Northwest ordinal metrics</a>
+        <a href="assets/tables/south_peninsular_deccan_monthly_ar_transfer_ordinal_metrics.csv">South ordinal metrics</a>
+        <a href="assets/tables/central_monsoon_core_full_bihar_monthly_ar_results_summary.csv">Central result summary</a>
+        <a href="assets/tables/central_monsoon_core_full_bihar_monthly_ar_transfer_ordinal_metrics.csv">Central ordinal metrics</a>
+        <a href="assets/tables/east_northeast_humid_orographic_monthly_ar_results_summary.csv">East-Northeast result summary</a>
+        <a href="assets/tables/east_northeast_humid_orographic_monthly_ar_transfer_ordinal_metrics.csv">East-Northeast ordinal metrics</a>
+        <a href="assets/tables/east_northeast_humid_orographic_full_assam_monthly_ar_results_summary.csv">East-Northeast Assam-inclusive result summary</a>
+        <a href="assets/tables/east_northeast_humid_orographic_full_assam_monthly_ar_transfer_ordinal_metrics.csv">East-Northeast Assam-inclusive ordinal metrics</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Benchmark page for India MonsoonBench artifact preview.</p>
+  </footer>
+</body>
+</html>

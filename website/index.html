@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>India MonsoonBench | Multimodal Rainfall Anomaly Dataset</title>
+  <meta name="description" content="A spatially aligned multimodal raster benchmark for Indian rainfall anomaly modeling, monthly autoregressive forecasting, and regional monsoon analysis.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-hero">
+    <nav class="nav">
+      <a class="brand" href="index.html">India MonsoonBench</a>
+      <div class="nav-links">
+        <a href="dataset.html">Dataset</a>
+        <a href="methodology.html">Methodology</a>
+        <a href="benchmarks.html">Benchmarks</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="reproducibility.html">Reproducibility</a>
+      </div>
+    </nav>
+
+    <section class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Artifact preview for KDD AI4Science rebuttal</p>
+        <h1>A multimodal benchmark for Indian rainfall anomaly forecasting.</h1>
+        <p class="lede">
+          India MonsoonBench is a spatially aligned, analysis-ready raster dataset
+          for regional monsoon modeling. It combines rainfall anomaly labels with
+          precipitation history, land surface temperature, NDVI, humidity, soil
+          moisture, wind speed, and elevation across Indian hydroclimatic regimes.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="benchmarks.html">View Benchmark Results</a>
+          <a class="button secondary" href="gallery.html">Open High-Resolution Maps</a>
+        </div>
+      </div>
+      <figure class="hero-figure">
+        <a href="assets/images/regions/india_sep2024_annual_modalities.png">
+          <img src="assets/images/regions/india_sep2024_annual_modalities.png" alt="All India multimodal raster mosaic for September 2024">
+        </a>
+        <figcaption>All-India multimodal raster view. Click any figure on this site to open the high-resolution image.</figcaption>
+      </figure>
+    </section>
+  </header>
+
+  <main>
+    <section class="stats-band">
+      <article>
+        <span class="stat-number">2020-2024</span>
+        <span class="stat-label">monthly raster stacks</span>
+      </article>
+      <article>
+        <span class="stat-number">19</span>
+        <span class="stat-label">monthly AR input channels</span>
+      </article>
+      <article>
+        <span class="stat-number">5</span>
+        <span class="stat-label">ordinal rainfall classes</span>
+      </article>
+      <article>
+        <span class="stat-number">4</span>
+        <span class="stat-label">regional rainfall regimes</span>
+      </article>
+    </section>
+
+    <section class="section two-column">
+      <div>
+        <p class="section-kicker">Core Contribution</p>
+        <h2>Not just files: a benchmark suite for monsoon ML.</h2>
+      </div>
+      <div class="prose">
+        <p>
+          The dataset is designed as a reproducible benchmark for monthly rainfall
+          anomaly prediction. Our strongest formulation is autoregressive:
+          the model observes the previous three months and predicts the rainfall
+          anomaly class for the next month. Splits are temporally strict, using
+          earlier years for training and 2024 for testing.
+        </p>
+        <p>
+          We intentionally describe the resource as a spatially aligned multimodal
+          raster benchmark rather than claiming that every modality has identical
+          native resolution. This is the scientifically safer framing: each source
+          preserves its native information content while being provided on a
+          common analysis grid for ML workflows.
+        </p>
+      </div>
+    </section>
+
+    <section class="section card-grid three">
+      <article class="feature-card">
+        <h3>Monthly Forecasting</h3>
+        <p>Three consecutive months of multimodal inputs predict the next monthly rainfall anomaly class.</p>
+      </article>
+      <article class="feature-card">
+        <h3>Regional Science</h3>
+        <p>Benchmarks are organized by hydroclimatic regimes rather than arbitrary state-only splits.</p>
+      </article>
+      <article class="feature-card">
+        <h3>Extreme Regimes</h3>
+        <p>Scarcity and large-excess recall quantify whether models capture drought-like and flood-like anomalies.</p>
+      </article>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-kicker">Regional Maps</p>
+        <h2>Four physically interpretable rainfall regimes.</h2>
+      </div>
+      <div class="image-grid two">
+        <figure>
+          <a href="assets/images/regions/northwest_himalayan_2024_sep_modalities.png">
+            <img src="assets/images/regions/northwest_himalayan_2024_sep_modalities.png" alt="Northwest-Himalayan rainfall regime multimodal map">
+          </a>
+          <figcaption>Northwest-Himalayan rainfall regime, September 2024.</figcaption>
+        </figure>
+        <figure>
+          <a href="assets/images/regions/central_monsoon_core_2024_sep_modalities.png">
+            <img src="assets/images/regions/central_monsoon_core_2024_sep_modalities.png" alt="Central Indian monsoon core multimodal map">
+          </a>
+          <figcaption>Central Indian monsoon core regime, September 2024.</figcaption>
+        </figure>
+      </div>
+      <p class="note">
+        Visualization-only nodata filling was used for some map panels to avoid distracting
+        within-state holes. Quantitative experiments use the original raster values.
+      </p>
+    </section>
+
+    <section class="section callout">
+      <p class="section-kicker">What researchers can do with it</p>
+      <h2>Applications enabled by the benchmark</h2>
+      <div class="tag-list">
+        <span>rainfall anomaly forecasting</span>
+        <span>regional transfer learning</span>
+        <span>modality ablation</span>
+        <span>extreme rainfall analysis</span>
+        <span>learned climate regimes</span>
+        <span>ordinal-loss evaluation</span>
+        <span>monsoon transition diagnostics</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>
+      India MonsoonBench artifact preview. Dataset and code release links will be
+      finalized with the archival artifact.
+    </p>
+  </footer>
+</body>
+</html>

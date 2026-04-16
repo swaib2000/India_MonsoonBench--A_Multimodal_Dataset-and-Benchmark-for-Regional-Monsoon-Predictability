@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+title: "India MonsoonBench: A Spatially Aligned Multimodal Dataset and Benchmark for Regional Rainfall Anomaly Forecasting"
+message: "If you use this code or benchmark, please cite the associated paper."
+type: software
+authors:
+  - family-names: "TBD"
+    given-names: "TBD"
+repository-code: "https://github.com/swaib2000/Learning-Regional-Monsoon-Patterns-with-a-Multimodal-Attention-U-Net"
+license: "NOASSERTION"

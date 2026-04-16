@@ -1,0 +1,292 @@
+Data Processing Notes
+Project: Multimodal Weather Analytics Dataset for Indian States
+Prepared on: 2026-03-27
+
+1. Overview
+This project builds state-level multimodal raster datasets for India using Google Earth Engine (GEE) exports and local post-processing. The target output for each state consists of:
+
+- Raw predictor rasters exported from GEE
+- Ground-truth precipitation category rasters derived from CHIRPS rainfall
+- Predictor rasters masked to the state boundary
+
+The workflow implemented in this repository uses:
+
+- GEE exports for raster generation
+- IMD rainfall climatology for long-period-average rainfall normals
+- Local raster masking and rainfall-category generation in Python
+
+
+2. GEE Data Export Workflow
+The following modalities were exported from Google Earth Engine for each state:
+
+- Y: Precipitation from CHIRPS
+- X: Land Surface Temperature (LST)
+- X: NDVI
+- X: Relative Humidity
+- X: Wind Speed
+- X: Soil Moisture
+- X: Land Use / Land Cover (LULC)
+- X: Elevation
+
+Repository scripts involved:
+
+- generate_gee_script.py
+- export_state_data.py
+- export_all_states.py
+
+Export characteristics in the current pipeline:
+
+- Years used: 2020, 2021, 2022, 2023, 2024
+- Months used: January to December
+- CHIRPS precipitation image contains 65 bands:
+  5 years x (12 monthly bands + 1 annual total band)
+- Other monthly modalities contain 60 bands:
+  5 years x 12 months
+
+
+3. Download and Local Organization
+After export, the TIFF files were downloaded from Google Drive to a local folder and then distributed into per-state directories under:
+
+- GridData/<State>/
+
+Each state directory is expected to contain:
+
+- StateName_Y_Precipitation_CHIRPS.tif
+- StateName_X_*.tif files
+- SateMask/gadm41_IND_1.shp and companion shapefile files
+
+
+4. Definition of Normals / Long-Period Average
+In this project, "normals" means monthly long-period average rainfall in millimeters.
+
+Operational definition used here:
+
+- For each IMD meteorological sub-division
+- For each calendar month from January to December
+- Monthly LPA = arithmetic mean of that month’s rainfall values across the selected baseline years
+
+Formula used:
+
+- LPA_m = (1 / N) * sum(R_y,m), over all baseline years y
+
+where:
+
+- LPA_m = long-period average rainfall for month m
+- R_y,m = rainfall in month m for year y
+- N = number of years in the baseline period
+
+In the implemented workflow, the baseline chosen was:
+
+- 1971-2000
+
+Reason:
+
+- A free official IMD subdivision time series was available for 1901-2017
+- A free official 1971-2020 subdivision normals table was not available in this workflow
+- Therefore, monthly normals were computed directly from the free time series over 1971-2000
+
+
+5. IMD Source Used for Normals
+Free official source used to compute monthly normals:
+
+- Title: Sub Divisional Monthly Rainfall from 1901 to 2017
+- Publisher: India Meteorological Department (IMD), Ministry of Earth Sciences
+- URL: https://delhi.data.gov.in/resource/sub-divisional-monthly-rainfall-1901-2017
+
+Downloaded local file used in this workflow:
+
+- /home/aparajita/Downloads/Sub_Division_IMD_2017.csv
+
+The file is a wide table with columns such as:
+
+- SUBDIVISION
+- YEAR
+- JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC
+
+
+6. State-to-Subdivision Mapping
+The free IMD source is organized by meteorological sub-division, not always by present-day state. Therefore, an explicit mapping was created in:
+
+- build_states_normals_from_imd_subdivisions.py
+- state_subdivision_mapping.csv
+
+Mapping policy used:
+
+- direct:
+  state maps one-to-one to an IMD sub-division
+- mean:
+  state spans multiple IMD sub-divisions, so a simple arithmetic mean across the relevant sub-divisions was used as a fallback
+- shared:
+  multiple states share one combined IMD sub-division, so the same monthly normals were assigned to each constituent state
+- unresolved:
+  the free IMD subdivision source cannot isolate the state cleanly; values are still written only when explicitly allowed, and the ambiguity is recorded
+
+Examples:
+
+- Uttarakhand -> direct -> Uttarakhand
+- Odisha -> direct -> Orissa (legacy label in the 1901-2017 file)
+- Andhra Pradesh -> mean -> Coastal Andhra Pradesh + Rayalseema
+- Uttar Pradesh -> mean -> East Uttar Pradesh + West Uttar Pradesh
+- Nagaland / Manipur / Mizoram / Tripura -> shared -> Naga Mani Mizo Tripura
+
+States flagged as ambiguous in the current workflow:
+
+- Goa
+- Haryana
+- Maharashtra
+- Meghalaya
+- Sikkim
+- Tamil Nadu
+- West Bengal
+
+These ambiguities are recorded in:
+
+- states_normals_from_imd_unresolved.csv
+
+
+7. Command Used to Compute IMD-Based Normals
+The repository script used was:
+
+- build_states_normals_from_imd_subdivisions.py
+
+Command used:
+
+python build_states_normals_from_imd_subdivisions.py \
+  --input /home/aparajita/Downloads/Sub_Division_IMD_2017.csv \
+  --start-year 1971 \
+  --end-year 2000 \
+  --output states_normals_from_imd.csv \
+  --allow-ambiguous
+
+Outputs produced:
+
+- states_normals_from_imd.csv
+- states_normals_from_imd_unresolved.csv
+
+Then the generated normals file was adopted as the working pipeline file:
+
+- states_normals.csv
+
+
+8. Rainfall Labeling / Ground-Truth Generation
+The file process_state_data.py converts CHIRPS rainfall into categorical ground-truth labels using the rainfall normal as reference.
+
+For each monthly rainfall band:
+
+- ratio = observed_rainfall / monthly_normal
+
+For annual total bands:
+
+- ratio = observed_annual_rainfall / annual_normal
+- annual_normal = sum of the 12 monthly normals
+
+Category labels used in the code:
+
+- 0: Scarcity, ratio < 0.4
+- 1: Deficit, 0.4 <= ratio < 0.8
+- 2: Normal, 0.8 <= ratio < 1.2
+- 3: Excess, 1.2 <= ratio < 1.6
+- 4: Large Excess, ratio >= 1.6
+
+The output rainfall-category raster is written as:
+
+- StateName_Y_Precipitation_GT_geotif.tif
+
+
+9. Raster Masking and Final Per-State Dataset
+The same processing script also masks all predictor rasters to the state boundary using:
+
+- SateMask/gadm41_IND_1.shp
+
+Masked outputs are written as:
+
+- StateName_X_*_masked.tif
+
+Thus, each state folder contains:
+
+- raw exported TIFFs
+- rainfall GT categories
+- masked predictor rasters
+
+
+9A. Working Dataset Used for Downstream Modeling
+The working dataset for downstream modeling was defined as the subset of states for which both of the following were available locally:
+
+- StateName_Y_Precipitation_GT_geotif.tif
+- the six masked predictor rasters:
+  X_Elevation, X_LST, X_NDVI, X_Relative_Humidity, X_Soil_Moisture, X_Wind_Speed
+
+Based on the actual processed outputs present in GridData, the included states are:
+
+- Andhra Pradesh
+- Arunachal Pradesh
+- Chhattisgarh
+- Goa
+- Gujarat
+- Haryana
+- Jharkhand
+- Madhya Pradesh
+- Maharashtra
+- Manipur
+- Meghalaya
+- Mizoram
+- Nagaland
+- Punjab
+- Sikkim
+- Tamil Nadu
+- Tripura
+- Uttar Pradesh
+- Uttarakhand
+- West Bengal
+
+Total included states:
+
+- 20
+
+States excluded from the current working dataset:
+
+- Odisha
+- Telangana
+
+Reason for exclusion:
+
+- Their local state folders and downloaded GEE exports were not present in the workspace at the time of post-processing, so GT and masked predictor rasters could not be generated for them.
+
+The clean included-state list used for downstream modeling is stored in:
+
+- included_states.txt
+
+
+10. Methodological Note for the Paper
+Suggested wording:
+
+"Monthly rainfall normals were defined as long-period averages (LPA) computed from the India Meteorological Department (IMD) sub-divisional monthly rainfall series over the 1971-2000 baseline. For each month, the LPA was calculated as the arithmetic mean of monthly rainfall across the baseline years. These normals were used to convert monthly CHIRPS rainfall into categorical rainfall anomaly classes. For states not uniquely separable in the IMD meteorological subdivision system, subdivision-level normals were assigned using an explicit state-to-subdivision mapping and the associated ambiguities were documented."
+
+
+11. Recommended Citations and URLs
+Primary data source for monthly rainfall time series:
+
+India Meteorological Department (IMD), Ministry of Earth Sciences. Sub Divisional Monthly Rainfall from 1901 to 2017. Open Government Data Platform India.
+URL: https://delhi.data.gov.in/resource/sub-divisional-monthly-rainfall-1901-2017
+
+IMD rainfall information portal:
+
+India Meteorological Department (IMD). Rainfall Information Portal.
+URL: https://mausam.imd.gov.in/responsive/rainfallinformation_state.php
+
+Free district normals source identified as an alternative reference:
+
+India Meteorological Department (IMD), Ministry of Earth Sciences. District Rainfall Normal (mm) Monthly, Seasonal and Annual Data, Period 1951-2000. Open Government Data Platform India.
+URL: https://www.data.gov.in/resource/district-rainfall-normal-mm-monthly-seasonal-and-annual-data-period-1951-2000
+
+
+12. Reproducibility Files in This Repository
+- states_normals.csv
+- states_normals_from_imd.csv
+- states_normals_from_imd_unresolved.csv
+- included_states.txt
+- build_states_normals_from_imd_subdivisions.py
+- state_subdivision_mapping.csv
+- process_state_data.py
+- export_state_data.py
+- generate_gee_script.py

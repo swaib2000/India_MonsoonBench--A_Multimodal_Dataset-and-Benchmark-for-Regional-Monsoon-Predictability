@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Methodology | India MonsoonBench</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="table-loader.js"></script>
+</head>
+<body>
+  <nav class="nav nav-light">
+    <a class="brand" href="index.html">India MonsoonBench</a>
+    <div class="nav-links">
+      <a href="dataset.html">Dataset</a>
+      <a class="active" href="methodology.html">Methodology</a>
+      <a href="benchmarks.html">Benchmarks</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="reproducibility.html">Reproducibility</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="page-title center">
+      <p class="eyebrow">Forecasting Formulation</p>
+      <h1>Autoregressive monthly rainfall anomaly forecasting.</h1>
+      <p class="lede dark">
+        The benchmark is designed to study monsoon transitions using regional
+        sliding-window forecasting. For each spatial patch, the model observes
+        three consecutive months of multimodal predictors and predicts the next
+        month rainfall anomaly class.
+      </p>
+    </section>
+
+    <section class="section center">
+      <div class="method-diagram" aria-label="Autoregressive monthly forecasting diagram">
+        <div class="diagram-box">
+          <strong>Input month m-3</strong>
+          <span>e.g., January</span>
+        </div>
+        <div class="diagram-plus">+</div>
+        <div class="diagram-box">
+          <strong>Input month m-2</strong>
+          <span>e.g., February</span>
+        </div>
+        <div class="diagram-plus">+</div>
+        <div class="diagram-box">
+          <strong>Input month m-1</strong>
+          <span>e.g., March</span>
+        </div>
+        <div class="diagram-arrow">predicts</div>
+        <div class="diagram-box target">
+          <strong>Target month m</strong>
+          <span>e.g., April rainfall class</span>
+        </div>
+      </div>
+      <p class="note center-note">
+        Example: January, February, and March predictors are used to predict the
+        April rainfall anomaly class. This is repeated for all target months from
+        January to December using valid cross-year context.
+      </p>
+    </section>
+
+    <section class="section two-column">
+      <div>
+        <p class="section-kicker">Mathematical Formulation</p>
+        <h2>Patch-wise monthly AR task</h2>
+      </div>
+      <div class="formula-card">
+        <p class="formula">
+          Given X(s, t-2), X(s, t-1), X(s, t), predict Y(s, t+1)
+        </p>
+        <p>
+          Here <strong>s</strong> is a spatial patch from a state, <strong>t</strong>
+          is a calendar month, <strong>X</strong> is the multimodal predictor stack,
+          and <strong>Y</strong> is the rainfall anomaly class. Equivalently, for
+          target month <strong>m</strong>, the input months are <strong>m-3, m-2,
+          m-1</strong> and the target horizon is <strong>1 month</strong>.
+        </p>
+        <p>
+          The task is trained separately per climatic region to avoid mixing
+          distinct rainfall-generating mechanisms and to expose region-specific
+          predictability.
+        </p>
+      </div>
+    </section>
+
+    <section class="section card-grid four">
+      <article class="metric-card center">
+        <span class="stat-number">3 months</span>
+        <span class="stat-label">input window</span>
+      </article>
+      <article class="metric-card center">
+        <span class="stat-number">1 month</span>
+        <span class="stat-label">target horizon</span>
+      </article>
+      <article class="metric-card center">
+        <span class="stat-number">Jan-Dec</span>
+        <span class="stat-label">target months</span>
+      </article>
+      <article class="metric-card center">
+        <span class="stat-number">19</span>
+        <span class="stat-label">input channels</span>
+      </article>
+    </section>
+
+    <section class="section">
+      <div class="section-heading center">
+        <p class="section-kicker">Input Channels</p>
+        <h2>How the 19-channel patch tensor is constructed</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Channel group</th>
+              <th>Variables</th>
+              <th>Time steps</th>
+              <th>Channel count</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Static terrain</td>
+              <td>Elevation</td>
+              <td>Static</td>
+              <td>1</td>
+              <td>Orographic and topographic context.</td>
+            </tr>
+            <tr>
+              <td>Dynamic rainfall memory</td>
+              <td>Precipitation</td>
+              <td>m-3, m-2, m-1</td>
+              <td>3</td>
+              <td>Prior rainfall state and hydrologic memory.</td>
+            </tr>
+            <tr>
+              <td>Dynamic surface and vegetation state</td>
+              <td>LST, NDVI</td>
+              <td>m-3, m-2, m-1</td>
+              <td>6</td>
+              <td>Thermal stress, greenness, and land-atmosphere coupling.</td>
+            </tr>
+            <tr>
+              <td>Dynamic atmospheric and land-surface moisture</td>
+              <td>Relative humidity, soil moisture, wind speed</td>
+              <td>m-3, m-2, m-1</td>
+              <td>9</td>
+              <td>Moisture availability, circulation proxy, and soil-water memory.</td>
+            </tr>
+            <tr>
+              <td><strong>Total</strong></td>
+              <td>6 dynamic modalities + elevation</td>
+              <td>3 months + static</td>
+              <td><strong>19</strong></td>
+              <td>Input tensor: 19 x 15 x 15.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading center">
+        <p class="section-kicker">Regional Benchmark Design</p>
+        <h2>Four climatic regions used for per-region training</h2>
+      </div>
+      <div class="table-wrap" data-csv="assets/tables/regional_dataset_summary.csv"></div>
+      <p class="note center-note">
+        Each region is trained independently. This formulation is more physically
+        meaningful than a single pooled national model because monsoon mechanisms
+        differ across orographic, coastal, arid, and central monsoon regimes.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="section-heading center">
+        <p class="section-kicker">Patch Counts</p>
+        <h2>Region-wise state patch counts</h2>
+      </div>
+      <div class="table-wrap" data-csv="assets/tables/regional_state_patch_counts.csv"></div>
+    </section>
+
+    <section class="section two-column">
+      <div>
+        <p class="section-kicker">Target Definition</p>
+        <h2>Rainfall class from IMD long-period average</h2>
+      </div>
+      <div class="prose">
+        <p>
+          Ground truth labels are ordinal rainfall anomaly categories. For each
+          month, observed rainfall is divided by the state's monthly long-period
+          average rainfall normal. The same logic is applied to annual totals by
+          using the sum of monthly normals.
+        </p>
+        <p class="formula">
+          ratio(s, m) = observed rainfall(s, m) / IMD monthly LPA(s, m)
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading center">
+        <p class="section-kicker">Rainfall Classes</p>
+        <h2>Five ordinal rainfall anomaly labels</h2>
+      </div>
+      <div class="table-wrap compact">
+        <table>
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Rainfall category</th>
+              <th>Ratio to monthly LPA</th>
+              <th>Interpretation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>0</td><td>Scarcity</td><td>&lt; 0.4</td><td>Severe rainfall shortfall.</td></tr>
+            <tr><td>1</td><td>Deficit</td><td>0.4 to &lt; 0.8</td><td>Below-normal rainfall.</td></tr>
+            <tr><td>2</td><td>Normal</td><td>0.8 to &lt; 1.2</td><td>Near-normal rainfall.</td></tr>
+            <tr><td>3</td><td>Excess</td><td>1.2 to &lt; 1.6</td><td>Above-normal rainfall.</td></tr>
+            <tr><td>4</td><td>Large Excess</td><td>&ge; 1.6</td><td>Extreme positive anomaly.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading center">
+        <p class="section-kicker">IMD Normals</p>
+        <h2>Long-period average rainfall values used for ground truth</h2>
+      </div>
+      <div class="table-wrap" data-csv="assets/tables/imd_lpa_normals_used.csv"></div>
+      <p class="note center-note">
+        Values are monthly rainfall normals in millimeters. They are used only
+        for label generation, not as model input.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="section-heading center">
+        <p class="section-kicker">Monsoon Transitions</p>
+        <h2>Transition-specific evaluation for scientific insight</h2>
+      </div>
+      <div class="transition-grid">
+        <article class="feature-card">
+          <h3>Winter to pre-monsoon</h3>
+          <p>Tests whether winter/spring states provide predictive context before onset.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Pre-monsoon to onset</h3>
+          <p>Captures the transition from hot/dry buildup to monsoon establishment.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Onset to peak</h3>
+          <p>Measures ability to forecast strengthening rainfall phases.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Peak to retreat</h3>
+          <p>Tests model behavior during monsoon weakening and spatial redistribution.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Retreat to post-monsoon</h3>
+          <p>Highlights post-monsoon and coastal/orographic anomaly difficulty.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Post-monsoon winter context</h3>
+          <p>Evaluates predictability during low-rainfall and transition months.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading center">
+        <p class="section-kicker">Transition Table</p>
+        <h2>Best model by transition and region</h2>
+      </div>
+      <div class="table-wrap" data-csv="assets/tables/best_model_by_transition_all_regions.csv"></div>
+      <p class="note center-note">
+        The table summarizes completed northwest, south, central, and
+        east-northeast regional workflows. For each transition, we report the
+        model with the best accuracy, weighted F1, within-one-class accuracy,
+        and lowest severe error rate.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Methodology page for India MonsoonBench artifact preview.</p>
+  </footer>
+</body>
+</html>

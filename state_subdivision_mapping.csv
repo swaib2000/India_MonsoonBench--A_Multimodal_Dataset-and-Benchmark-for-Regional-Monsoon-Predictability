@@ -1,0 +1,28 @@
+state,mode,imd_subdivisions,note
+Andhra Pradesh,mean,Coastal Andhra Pradesh & Yanam | Rayalaseema,State spans two IMD sub-divisions; simple mean is only a fallback.
+Arunachal Pradesh,direct,Arunachal Pradesh,Exact one-to-one mapping.
+Assam,shared,Assam & Meghalaya,IMD combines Assam and Meghalaya; the shared sub-division normals are assigned to Assam.
+Chhattisgarh,direct,Chhattisgarh,Exact one-to-one mapping.
+Goa,unresolved,Konkan & Goa,IMD combines Goa with Konkan; source cannot isolate Goa.
+Gujarat,mean,Gujarat Region | Saurashtra & Kutch,State spans two IMD sub-divisions; simple mean is only a fallback.
+Haryana,unresolved,Haryana Chandigarh & Delhi,IMD combines Haryana with Chandigarh and Delhi; source cannot isolate Haryana.
+Himachal Pradesh,direct,Himachal Pradesh,Exact one-to-one mapping.
+Jharkhand,direct,Jharkhand,Exact one-to-one mapping.
+Karnataka,mean,Coastal Karnataka | North Interior Karnataka | South Interior Karnataka,State spans three IMD sub-divisions; simple mean is used as an unweighted fallback.
+Kerala,direct,Kerala,Exact one-to-one mapping.
+Madhya Pradesh,mean,East Madhya Pradesh | West Madhya Pradesh,State spans two IMD sub-divisions; simple mean is only a fallback.
+Maharashtra,unresolved,Konkan & Goa | Madhya Maharashtra | Marathwada | Vidarbha,Konkan is merged with Goa in IMD source; state cannot be isolated cleanly.
+Manipur,shared,Nagaland Manipur Mizoram Tripura,IMD combines four states; the shared sub-division normals are assigned to Manipur.
+Meghalaya,unresolved,Assam & Meghalaya,IMD combines Assam and Meghalaya; source cannot isolate Meghalaya.
+Mizoram,shared,Nagaland Manipur Mizoram Tripura,IMD combines four states; the shared sub-division normals are assigned to Mizoram.
+Nagaland,shared,Nagaland Manipur Mizoram Tripura,IMD combines four states; the shared sub-division normals are assigned to Nagaland.
+Odisha,direct,Odisha,Exact one-to-one mapping.
+Punjab,direct,Punjab,Exact one-to-one mapping.
+Rajasthan,mean,East Rajasthan | West Rajasthan,State spans two IMD sub-divisions; simple mean is used as an unweighted fallback.
+Sikkim,unresolved,Sub-Himalayan West Bengal & Sikkim,IMD combines Sikkim with Sub-Himalayan West Bengal; source cannot isolate Sikkim.
+Tamil Nadu,unresolved,Tamil Nadu Puducherry & Karaikal,IMD combines Tamil Nadu with Puducherry and Karaikal; source cannot isolate Tamil Nadu.
+Telangana,direct,Telangana,Exact one-to-one mapping.
+Tripura,shared,Nagaland Manipur Mizoram Tripura,IMD combines four states; the shared sub-division normals are assigned to Tripura.
+Uttar Pradesh,mean,East Uttar Pradesh | West Uttar Pradesh,State spans two IMD sub-divisions; simple mean is only a fallback.
+Uttarakhand,direct,Uttarakhand,Exact one-to-one mapping.
+West Bengal,unresolved,Gangetic West Bengal | Sub-Himalayan West Bengal & Sikkim,Sub-Himalayan West Bengal is merged with Sikkim; source cannot isolate West Bengal cleanly.

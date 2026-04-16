@@ -1,0 +1,5 @@
+state,mode,imd_subdivisions,jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec,annual,note
+Himachal Pradesh,direct,Himachal Pradesh,82.6,97,112.5,64.2,67.5,97.1,260.1,236.6,114.5,27.1,21.4,40.4,1221.0,Computed from IMD sub-divisional monthly rainfall time series over 1971-2000.
+Rajasthan,mean,East Rajasthan | West Rajasthan,4.2,4.6,2.2,4.4,12.4,50.6,169.1,150.7,59.5,12.1,5.2,2.3,477.2,Unweighted mean of East Rajasthan and West Rajasthan IMD subdivisions over 1971-2000.
+East Rajasthan,subdivision,East Rajasthan,5.1,4.9,2,3.8,11.2,65.7,228.7,217.7,82.3,16.7,7.7,3.3,649.1,Component subdivision used for Rajasthan.
+West Rajasthan,subdivision,West Rajasthan,3.3,4.3,2.4,5,13.6,35.4,109.5,83.7,36.6,7.5,2.7,1.2,305.2,Component subdivision used for Rajasthan.

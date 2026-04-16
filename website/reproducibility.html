@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reproducibility | India MonsoonBench</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav nav-light">
+    <a class="brand" href="index.html">India MonsoonBench</a>
+    <div class="nav-links">
+      <a href="dataset.html">Dataset</a>
+      <a href="methodology.html">Methodology</a>
+      <a href="benchmarks.html">Benchmarks</a>
+      <a href="gallery.html">Gallery</a>
+      <a class="active" href="reproducibility.html">Reproducibility</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="page-title">
+      <p class="eyebrow">Reproducibility</p>
+      <h1>Commands for rebuilding datasets, splits, benchmarks, and analyses.</h1>
+      <p class="lede dark">
+        The full code/data release will include scripts, manifests, trained-run
+        summaries, and patch datasets. This page records the workflow used for
+        the rebuttal experiments.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-kicker">Monthly Autoregressive Dataset</p>
+        <h2>Example: Central Indian monsoon core with Bihar full-stack repair</h2>
+      </div>
+      <pre><code>python3 -u extract_monthly_autoregressive_patches.py \
+  --manifest modeling_manifest.csv \
+  --region central_monsoon_core \
+  --output-dir patch_dataset_monthly_ar_central_monsoon_core_full_bihar \
+  --dynamic-modalities precipitation,lst,ndvi,rh,soil_moisture,wind_speed \
+  --static-predictor elevation \
+  --target-years 2021,2022,2023,2024 \
+  --target-months 1,2,3,4,5,6,7,8,9,10,11,12 \
+  --input-window 3 \
+  --horizon 1 \
+  --patch-size 15 \
+  --stride 16 \
+  --min-valid-fraction 0.5 \
+  --fill-value 0.0 \
+  --skip-incomplete-states</code></pre>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-kicker">Temporal Split</p>
+        <h2>Strict year holdout</h2>
+      </div>
+      <pre><code>python3 make_splits.py \
+  --dataset-dir patch_dataset_monthly_ar_central_monsoon_core_full_bihar \
+  --split-mode year_holdout \
+  --train-years 2021,2022 \
+  --val-years 2023 \
+  --test-years 2024</code></pre>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-kicker">Training</p>
+        <h2>Regional workflow scripts</h2>
+      </div>
+      <pre><code>./run_central_monsoon_transfer_workflow.sh
+./run_east_northeast_humid_orographic_workflow.sh</code></pre>
+      <p class="note">
+        These scripts train Conv3D, ConvLSTM, and Swin3D baselines with transferred
+        tuned hyperparameters, then compute per-state, per-region, extreme-regime,
+        ordinal-distance, and transition-specific analyses.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-kicker">Task Definition</p>
+        <h2>Monthly AR forecasting</h2>
+      </div>
+      <div class="formula-card">
+        <p>
+          For each patch location and target month <strong>m</strong>, the input is:
+        </p>
+        <p class="formula">
+          X = [Elevation, P<sub>m-3:m-1</sub>, LST<sub>m-3:m-1</sub>, NDVI<sub>m-3:m-1</sub>,
+          RH<sub>m-3:m-1</sub>, SM<sub>m-3:m-1</sub>, Wind<sub>m-3:m-1</sub>]
+        </p>
+        <p>
+          The target is the ordinal rainfall anomaly class for month <strong>m</strong>.
+          With six dynamic modalities and three time steps plus one static elevation
+          channel, the model input has <strong>19 channels</strong>.
+        </p>
+      </div>
+    </section>
+
+    <section class="section caution">
+      <h2>Artifact release note</h2>
+      <p>
+        This website is a preview page for explanation and visualization. A final
+        artifact release should include persistent dataset storage, code, manifests,
+        checksums, and a DOI-backed archive when possible.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Reproducibility page for India MonsoonBench artifact preview.</p>
+  </footer>
+</body>
+</html>

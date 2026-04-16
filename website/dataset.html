@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dataset | India MonsoonBench</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav nav-light">
+    <a class="brand" href="index.html">India MonsoonBench</a>
+    <div class="nav-links">
+      <a class="active" href="dataset.html">Dataset</a>
+      <a href="methodology.html">Methodology</a>
+      <a href="benchmarks.html">Benchmarks</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="reproducibility.html">Reproducibility</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="page-title">
+      <p class="eyebrow">Dataset Design</p>
+      <h1>Spatially aligned raster stacks for Indian monsoon anomaly research.</h1>
+      <p class="lede dark">
+        The dataset provides ML-ready raster stacks and patch benchmarks built
+        from GEE exports, IMD-derived rainfall normals, and state-boundary masking.
+      </p>
+    </section>
+
+    <section class="section card-grid four">
+      <article class="metric-card">
+        <span class="stat-number">5 years</span>
+        <span class="stat-label">2020, 2021, 2022, 2023, 2024</span>
+      </article>
+      <article class="metric-card">
+        <span class="stat-number">60</span>
+        <span class="stat-label">monthly dynamic bands per predictor</span>
+      </article>
+      <article class="metric-card">
+        <span class="stat-number">65</span>
+        <span class="stat-label">rainfall label bands including annual totals</span>
+      </article>
+      <article class="metric-card">
+        <span class="stat-number">15 x 15</span>
+        <span class="stat-label">default spatial patch size</span>
+      </article>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-kicker">Modalities</p>
+        <h2>Predictors, targets, and units</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Role</th>
+              <th>Temporal behavior</th>
+              <th>Units / labels</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Precipitation</td>
+              <td>Dynamic predictor and target source</td>
+              <td>Monthly, 2020-2024</td>
+              <td>mm; anomaly class 0-4</td>
+              <td>CHIRPS rainfall converted to ordinal anomaly labels using IMD normals.</td>
+            </tr>
+            <tr>
+              <td>Land surface temperature</td>
+              <td>Dynamic predictor</td>
+              <td>Monthly</td>
+              <td>degree C</td>
+              <td>Thermal signal related to surface dryness and monsoon transitions.</td>
+            </tr>
+            <tr>
+              <td>NDVI</td>
+              <td>Dynamic predictor</td>
+              <td>Monthly</td>
+              <td>unitless index</td>
+              <td>Vegetation response and land-atmosphere coupling indicator.</td>
+            </tr>
+            <tr>
+              <td>Relative humidity</td>
+              <td>Dynamic predictor</td>
+              <td>Monthly</td>
+              <td>%</td>
+              <td>Moisture availability signal; coarser native information content.</td>
+            </tr>
+            <tr>
+              <td>Soil moisture</td>
+              <td>Dynamic predictor</td>
+              <td>Monthly</td>
+              <td>m3/m3</td>
+              <td>Land-surface memory variable; coarser native information content.</td>
+            </tr>
+            <tr>
+              <td>Wind speed</td>
+              <td>Dynamic predictor</td>
+              <td>Monthly</td>
+              <td>m/s</td>
+              <td>Monsoon circulation proxy; coarser native information content.</td>
+            </tr>
+            <tr>
+              <td>Elevation</td>
+              <td>Static predictor</td>
+              <td>Static</td>
+              <td>m</td>
+              <td>Orographic forcing and regional terrain context.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section two-column">
+      <div>
+        <p class="section-kicker">Rainfall Labels</p>
+        <h2>Ordinal anomaly categories</h2>
+      </div>
+      <div class="table-wrap compact">
+        <table>
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Name</th>
+              <th>Observed / normal ratio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>0</td><td>Scarcity</td><td>&lt; 0.4</td></tr>
+            <tr><td>1</td><td>Deficit</td><td>0.4 to &lt; 0.8</td></tr>
+            <tr><td>2</td><td>Normal</td><td>0.8 to &lt; 1.2</td></tr>
+            <tr><td>3</td><td>Excess</td><td>1.2 to &lt; 1.6</td></tr>
+            <tr><td>4</td><td>Large Excess</td><td>&ge; 1.6</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-kicker">Regional Grouping</p>
+        <h2>Hydroclimatic regimes used for benchmark analysis</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Regime</th>
+              <th>States used / requested</th>
+              <th>Scientific motivation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Northwest-Himalayan</td>
+              <td>Haryana, Himachal Pradesh, Punjab, Rajasthan, Uttarakhand</td>
+              <td>Arid-to-orographic gradient, western disturbance influence, Himalayan terrain.</td>
+            </tr>
+            <tr>
+              <td>Central Indian Monsoon Core</td>
+              <td>Bihar, Chhattisgarh, Jharkhand, Madhya Pradesh, Maharashtra, Uttar Pradesh</td>
+              <td>Major monsoon rainfall belt and large agricultural exposure.</td>
+            </tr>
+            <tr>
+              <td>South Peninsular-Deccan</td>
+              <td>Andhra Pradesh, Goa, Karnataka, Kerala, Tamil Nadu</td>
+              <td>Peninsular monsoon seasonality, coastal influence, Western Ghats effects.</td>
+            </tr>
+            <tr>
+              <td>East-Northeast Humid Orographic</td>
+              <td>Arunachal Pradesh, Assam, Manipur, Meghalaya, Mizoram, Nagaland, Sikkim, Tripura, West Bengal</td>
+              <td>Humid/orographic rainfall, complex terrain, and northeast monsoon variability.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section caution">
+      <h2>Resolution and limitations</h2>
+      <p>
+        The benchmark is distributed on a common raster grid for modeling, but
+        source variables have different native resolutions and physical meanings.
+        Coarser variables such as humidity, soil moisture, and wind speed should
+        be interpreted as aligned contextual fields rather than true high-resolution
+        measurements. The temporal span is 2020-2024, making the resource most
+        appropriate for benchmark and short-period anomaly modeling rather than
+        long-term climatological trend attribution.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Dataset page for India MonsoonBench artifact preview.</p>
+  </footer>
+</body>
+</html>
