@@ -257,7 +257,11 @@ Then open `http://localhost:8080`.
 
 The repository does not include large raster exports, patch arrays, model checkpoints, or full training logs. The code documents the full processing pipeline from GEE export to model evaluation, while `results/` contains lightweight summaries that are safe to version-control.
 
-The dataset archive should be distributed separately through an anonymized data link or permanent repository. A checksum is recommended for the released archive so users can verify that their downloaded file exactly matches the intended dataset package.
+The compressed dataset archive is available here:
+
+[India MonsoonBench data archive](https://drive.google.com/drive/folders/1w8cE4vUk6ThXHbsKpT9GTpr8nvkQJbF0?usp=drive_link)
+
+A checksum is recommended for the released archive so users can verify that their downloaded file exactly matches the intended dataset package. For long-term public release, this archive can also be mirrored to a persistent repository such as Zenodo.
 
 ## Citation
 
