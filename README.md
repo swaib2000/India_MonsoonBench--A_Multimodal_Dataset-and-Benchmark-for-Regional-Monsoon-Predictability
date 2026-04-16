@@ -1,11 +1,7 @@
 # India MonsoonBench
 
 <p align="center">
-  <img src="website/assets/images/readme/monsoonbench_regional_readme_collage.png" alt="India MonsoonBench region-specific multimodal predictor collage for Sep 2024" width="100%">
-</p>
-
-<p align="center">
-  <em>Region-specific multimodal predictor mosaics used in the monthly autoregressive rainfall anomaly benchmark.</em>
+  <img src="website/assets/images/readme/india_monsoonbench.png" alt="India MonsoonBench regional multimodal benchmark overview" width="100%">
 </p>
 
 India MonsoonBench is a spatially aligned multimodal dataset and benchmark for regional Indian rainfall anomaly forecasting. The benchmark is designed as a dataset/resource contribution rather than a global weather foundation model. It provides a reproducible workflow for curating Earth-observation predictors, generating IMD long-period-average-based rainfall anomaly labels, extracting spatial patches, and evaluating temporal forecasting baselines across Indian hydroclimatic regimes.
