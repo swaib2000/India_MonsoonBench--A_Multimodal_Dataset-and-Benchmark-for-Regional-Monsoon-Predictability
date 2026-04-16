@@ -18,7 +18,7 @@ This makes the benchmark useful for climate-AI researchers who need a structured
 
 ## Dataset Story
 
-The dataset starts from state-wise Earth-observation rasters and converts them into spatially aligned monthly predictor stacks. Rainfall labels are defined using a physically interpretable anomaly ratio: observed CHIRPS rainfall is compared against IMD long-period-average rainfall normals. This creates five ordered rainfall anomaly classes following the familiar IMD-style interpretation of Scarcity, Deficit, Normal, Excess, and Large Excess rainfall.
+The dataset starts from state-wise Earth-observation rasters and converts them into spatially aligned monthly predictor stacks. Rainfall labels are defined using a physically interpretable anomaly ratio: observed CHIRPS rainfall is compared against Indian Meterology Department's (IMD) long-period-average rainfall normals. This creates five ordered rainfall anomaly classes following the familiar IMD interpretation of Scarcity, Deficit, Normal, Excess, and Large Excess rainfall.
 
 Unlike a generic image-classification dataset, India MonsoonBench preserves the spatial organization of each state and groups states into hydroclimatic rainfall regimes. The processed benchmark currently covers 25 Indian states across four regions. Large raster stacks and patch arrays are distributed separately from the GitHub repository; this repo contains the code, metadata, documentation, lightweight result summaries, and reproducibility scripts.
 
