@@ -25,6 +25,10 @@ swaib2000.github.io/
 GridData/
 GEE_Exports/
 patch_dataset*/
+India_MonsoonBench_DataRelease/
+*.tar.zst
+*.tar.gz
+*.zip
 *.tif
 *.tiff
 *.shp
