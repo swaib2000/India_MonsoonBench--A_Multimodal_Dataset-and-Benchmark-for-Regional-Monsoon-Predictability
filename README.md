@@ -71,6 +71,21 @@ These labels are ordinal. Predicting Scarcity as Deficit is not physically equiv
 
 The current processed release covers 25 states. Jammu and Kashmir, Odisha, and Telangana are documented as missing from the processed benchmark because complete GEE exports/post-processing were not available at the rebuttal deadline.
 
+## Dataset Size
+
+The GitHub repository stores code, documentation, website assets, and lightweight CSV summaries. Large arrays and raster products are distributed through the external data archive.
+
+| Artifact | Contents | Approx. size |
+|---|---|---:|
+| Compressed data archive | Packaged release uploaded externally | 918.5 MB |
+| Expanded data archive | Patch datasets, metadata, and result summaries | About 8.3 GB |
+| Northwest-Himalayan patch dataset | `X.npy`, `y.npy`, sample metadata, train/val/test indices | 1.9 GB |
+| Central Indian Monsoon Core patch dataset | `X.npy`, `y.npy`, sample metadata, train/val/test indices | 3.9 GB |
+| South Peninsular-Deccan patch dataset | `X.npy`, `y.npy`, sample metadata, train/val/test indices | 1.7 GB |
+| East-Northeast Humid Orographic patch dataset | `X.npy`, `y.npy`, sample metadata, train/val/test indices | 949 MB |
+| GitHub `results/` summaries | Metadata, compact benchmark summaries, transition analysis | 84 KB |
+| GitHub `website/` assets | Static project page and figures | 32 MB |
+
 ## Temporal Splits
 
 | Region | Train target years 2021-2022 | Validation target year 2023 | Test target year 2024 | Total samples |
@@ -184,6 +199,8 @@ India MonsoonBench is:
 | `analyze_transition_specific_performance.py` | Monsoon-transition evaluation |
 | `results/` | Lightweight CSV result summaries suitable for git |
 | `website/` | Static project page with figures, tables, and benchmark explanation |
+| `docs/` | Repository organization and dataset usage notes |
+| `notebooks/` | Lightweight tutorial notebook for inspecting the archive |
 
 Large rasters, NumPy patch datasets, model checkpoints, and logs are intentionally excluded from git. They should be generated locally or distributed through the separate data archive.
 
@@ -262,6 +279,42 @@ The compressed dataset archive is available here:
 [India MonsoonBench data archive](https://drive.google.com/drive/folders/1w8cE4vUk6ThXHbsKpT9GTpr8nvkQJbF0?usp=drive_link)
 
 A checksum is recommended for the released archive so users can verify that their downloaded file exactly matches the intended dataset package. For long-term public release, this archive can also be mirrored to a persistent repository such as Zenodo.
+
+## How to Use the Dataset Archive
+
+After downloading and extracting the archive, the expected layout is:
+
+```text
+India_MonsoonBench_DataRelease/
+  README_DATA.md
+  MANIFEST.csv
+  metadata/
+  results/
+  patch_datasets/
+    patch_dataset_monthly_ar_northwest_himalayan_full/
+    patch_dataset_monthly_ar_central_monsoon_core_full_bihar/
+    patch_dataset_monthly_ar_south_peninsular_deccan_full/
+    patch_dataset_monthly_ar_east_northeast_humid_orographic_full_assam/
+```
+
+Each regional patch dataset contains:
+
+| File | Purpose |
+|---|---|
+| `X.npy` | Input tensor with 19 channels per patch |
+| `y.npy` | Rainfall anomaly class labels |
+| `samples.csv` | Patch metadata including state, target year, and target month |
+| `train_idx.npy` | Training indices for target years 2021-2022 |
+| `val_idx.npy` | Validation indices for target year 2023 |
+| `test_idx.npy` | Test indices for target year 2024 |
+| `config.json` | Patch extraction configuration |
+| `split_summary.csv` | Split-level sample counts |
+
+For a lightweight walkthrough, open:
+
+```text
+notebooks/india_monsoonbench_quickstart.ipynb
+```
 
 ## Citation
 
