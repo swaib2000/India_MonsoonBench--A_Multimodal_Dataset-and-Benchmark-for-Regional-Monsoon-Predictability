@@ -1,0 +1,5 @@
+region_key,region_name,num_states_used,num_samples,num_channels,states_used,skipped_states
+northwest_himalayan,Northwest-Himalayan Rainfall Regime,5,115917,19,Himachal Pradesh; Rajasthan; Haryana; Punjab; Uttarakhand,None
+central_monsoon_core,Central Indian Monsoon Core Regime,6,238057,19,Bihar; Chhattisgarh; Jharkhand; Madhya Pradesh; Maharashtra; Uttar Pradesh,None
+south_peninsular_deccan,South Peninsular-Deccan Rainfall Regime,5,100737,19,Karnataka; Kerala; Andhra Pradesh; Goa; Tamil Nadu,None
+east_northeast_humid_orographic,East-Northeast Humid Orographic Regime,9,57440,19,Assam; Arunachal Pradesh; Manipur; Meghalaya; Mizoram; Nagaland; Sikkim; Tripura; West Bengal,None

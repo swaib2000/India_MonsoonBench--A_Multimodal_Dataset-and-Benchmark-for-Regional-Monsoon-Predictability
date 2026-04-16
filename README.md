@@ -48,6 +48,7 @@ The current processed release covers 25 states. Jammu and Kashmir, Odisha, and T
 | `analyze_extreme_regime_errors.py` | Scarcity/Large Excess error analysis |
 | `analyze_transition_specific_performance.py` | Monsoon-transition evaluation |
 | `website/` | Static project page with tables, figures, and benchmark explanation |
+| `results/` | Lightweight CSV result summaries suitable for git |
 
 Large rasters, NumPy patch datasets, model checkpoints, and logs are intentionally excluded from git. They should be generated locally or distributed through a separate data archive.
 
@@ -120,4 +121,3 @@ Then open `http://localhost:8080`.
 ## Data Availability
 
 The repository does not include large raster exports or patch arrays. The code documents the full processing pipeline from GEE export to model evaluation. Dataset archives and permanent release links should be added separately before public release.
-

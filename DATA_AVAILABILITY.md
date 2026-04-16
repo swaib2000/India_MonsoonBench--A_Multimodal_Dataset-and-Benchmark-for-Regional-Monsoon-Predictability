@@ -20,6 +20,6 @@ The repository contains scripts and metadata needed to reproduce the benchmark f
 - Year-held-out split generation
 - Model training and evaluation scripts
 - Static website tables and visual summaries
+- Lightweight benchmark result summaries in `results/`
 
 Before public release, dataset archives should be deposited separately using an archival service such as Zenodo, Figshare, OSF, or an institutional repository. The README and website should then be updated with permanent DOI/download links.
-

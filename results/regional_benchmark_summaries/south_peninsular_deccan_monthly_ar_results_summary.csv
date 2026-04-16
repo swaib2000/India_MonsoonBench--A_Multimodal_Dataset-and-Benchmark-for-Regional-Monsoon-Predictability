@@ -1,0 +1,4 @@
+run_dir,label,model,loss,best_epoch,best_val_acc,test_acc,test_weighted_f1,test_loss,num_train,num_val,num_test
+baseline_runs/conv3d_monthly_ar_south_peninsular_deccan_transfer_ce,conv3d (ce),conv3d,ce,1,0.3422275163787969,0.37371451260671035,0.3881592845061,1.6887017487296279,50367,25185,25185
+baseline_runs/convlstm_monthly_ar_south_peninsular_deccan_transfer_ce,convlstm (ce),convlstm,ce,1,0.3726424459003375,0.42930315664085766,0.43748927797621384,1.4511971468013833,50367,25185,25185
+baseline_runs/swin3d_monthly_ar_south_peninsular_deccan_transfer_ce,swin3d (ce),swin3d,ce,1,0.34179074846138574,0.42926345046654757,0.4329052666113261,1.4584932467377514,50367,25185,25185

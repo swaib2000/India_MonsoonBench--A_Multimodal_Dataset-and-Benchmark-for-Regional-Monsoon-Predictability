@@ -1,0 +1,25 @@
+region,transition_label,best_acc_model,best_acc,best_wf1_model,best_wf1,best_within1_model,best_within1,lowest_severe_model,lowest_severe_rate
+Northwest-Himalayan,monsoon_onset_to_peak,convlstm (ce),0.4395445134575569,convlstm (ce),0.4648748207768621,convlstm (ce),0.7778467908902692,convlstm (ce),0.2221532091097308
+Northwest-Himalayan,monsoon_peak_to_retreat,swin3d (ce),0.5519668737060042,swin3d (ce),0.4913854362508475,swin3d (ce),0.7879917184265011,swin3d (ce),0.2120082815734989
+Northwest-Himalayan,monsoon_retreat_to_post_monsoon,swin3d (ce),0.5161490683229814,"conv3d (ce, tuned)",0.5038111212960755,"conv3d (ce, tuned)",0.6378881987577639,"conv3d (ce, tuned)",0.362111801242236
+Northwest-Himalayan,post_monsoon_winter_context,convlstm (ce),0.3624568668046929,convlstm (ce),0.3337363328049672,convlstm (ce),0.5823326432022085,convlstm (ce),0.4176673567977916
+Northwest-Himalayan,pre_monsoon_to_monsoon_onset,swin3d (ce),0.3432712215320911,swin3d (ce),0.3527913178458885,convlstm (ce),0.7933747412008282,convlstm (ce),0.2066252587991718
+Northwest-Himalayan,winter_to_pre_monsoon,"conv3d (ce, tuned)",0.3598343685300207,"conv3d (ce, tuned)",0.3489244469450881,"conv3d (ce, tuned)",0.6851621808143548,"conv3d (ce, tuned)",0.3148378191856453
+South Peninsular-Deccan,monsoon_onset_to_peak,convlstm (ce),0.4817726947819871,convlstm (ce),0.4610642878676682,convlstm (ce),0.7796044793900405,convlstm (ce),0.2203955206099594
+South Peninsular-Deccan,monsoon_peak_to_retreat,conv3d (ce),0.3045757864632983,conv3d (ce),0.2702558770361019,conv3d (ce),0.6925643469971401,conv3d (ce),0.3074356530028598
+South Peninsular-Deccan,monsoon_retreat_to_post_monsoon,swin3d (ce),0.2093854216293473,swin3d (ce),0.2013057164620969,swin3d (ce),0.4568842305859933,swin3d (ce),0.5431157694140066
+South Peninsular-Deccan,post_monsoon_winter_context,swin3d (ce),0.5334711400858642,swin3d (ce),0.5244464728480907,swin3d (ce),0.7228494196215615,swin3d (ce),0.2771505803784385
+South Peninsular-Deccan,pre_monsoon_to_monsoon_onset,convlstm (ce),0.5742857142857143,convlstm (ce),0.5528704457179582,swin3d (ce),0.8023809523809524,swin3d (ce),0.1976190476190476
+South Peninsular-Deccan,winter_to_pre_monsoon,convlstm (ce),0.493891797556719,convlstm (ce),0.4931689704940317,swin3d (ce),0.7475805172140251,swin3d (ce),0.2524194827859749
+Central Indian Monsoon Core,monsoon_onset_to_peak,swin3d (ce),0.4416422879047715,swin3d (ce),0.4297278374126698,convlstm (ce),0.8858065166952487,convlstm (ce),0.1141934833047513
+Central Indian Monsoon Core,monsoon_peak_to_retreat,convlstm (ce),0.3805095026283865,convlstm (ce),0.3295386660535073,conv3d (ce),0.94035584310554,conv3d (ce),0.0596441568944601
+Central Indian Monsoon Core,monsoon_retreat_to_post_monsoon,convlstm (ce),0.4447697899838449,convlstm (ce),0.4476077865982619,convlstm (ce),0.6045032310177706,convlstm (ce),0.3954967689822294
+Central Indian Monsoon Core,post_monsoon_winter_context,swin3d (ce),0.2663039828060984,swin3d (ce),0.2747797173584644,swin3d (ce),0.5729733360198804,swin3d (ce),0.4270266639801195
+Central Indian Monsoon Core,pre_monsoon_to_monsoon_onset,conv3d (ce),0.3606689502317147,conv3d (ce),0.349322264090686,conv3d (ce),0.7960910739472093,conv3d (ce),0.2039089260527906
+Central Indian Monsoon Core,winter_to_pre_monsoon,convlstm (ce),0.3706763382362818,swin3d (ce),0.3535057655222512,conv3d (ce),0.5777419571495735,conv3d (ce),0.4222580428504265
+East-Northeast Humid Orographic,monsoon_onset_to_peak,swin3d (ce),0.3793391886240067,conv3d (ce),0.3775700240562836,swin3d (ce),0.931827687160184,swin3d (ce),0.0681723128398159
+East-Northeast Humid Orographic,monsoon_peak_to_retreat,swin3d (ce),0.3277451802179379,swin3d (ce),0.3308436919161004,convlstm (ce),0.865046102263202,convlstm (ce),0.134953897736798
+East-Northeast Humid Orographic,monsoon_retreat_to_post_monsoon,convlstm (ce),0.2824267782426778,convlstm (ce),0.2612532226908312,convlstm (ce),0.6092050209205021,convlstm (ce),0.3907949790794979
+East-Northeast Humid Orographic,post_monsoon_winter_context,convlstm (ce),0.2540345019476906,convlstm (ce),0.2659888180980337,convlstm (ce),0.4961046188091263,convlstm (ce),0.5038953811908736
+East-Northeast Humid Orographic,pre_monsoon_to_monsoon_onset,swin3d (ce),0.3555926544240401,swin3d (ce),0.3119171991137405,conv3d (ce),0.654424040066778,conv3d (ce),0.345575959933222
+East-Northeast Humid Orographic,winter_to_pre_monsoon,convlstm (ce),0.246521981079577,convlstm (ce),0.1930932541692476,convlstm (ce),0.5851419031719532,convlstm (ce),0.4148580968280467
